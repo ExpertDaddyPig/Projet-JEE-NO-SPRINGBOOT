@@ -41,6 +41,22 @@ Payslip => {
 
 ## Gestion des functions
 ```
+// Gestion des employés:
+addEmploye(String first_name, String last_name, String gender, Departement departement, String job_name, String rank, Int age) {
+    String registration_number = | générer une suite de chiffres aléatoires de 15-20 caractères |;
+    | Chercher dans la base si le numéro de matricule n'est pas déjà pris, si il est déjà pris il faudra le regénérer (et ce en boucle tant qu'il n'est pas unique) |
+    | Sauvegarder les données dans la BDD |
+}
+
+deleteEmploye(String registration_number) {
+    | Trouver l'employé correspondant dans la BDD et supprimer (plutot simple) |
+}
+
+getEmploye(String registration_number) {
+    | Trouver l'employé correspondant dans la BDD et le sauvegarder dans une classe (plutot simple aussi) |
+}
+
+updateEmploye()
 ```
 
 # Le reste c'est turbo ez

@@ -26,6 +26,12 @@ CREATE TABLE
         job_name VARCHAR(100),
         employe_rank INT,
         age INT,
+        email VARCHAR(100) NOT NULL UNIQUE,
+        username VARCHAR(50) NOT NULL UNIQUE,
+        password_hash VARCHAR(255) NOT NULL,
+        createdAt DATE,
+        lastLogin DATE,
+        active BOOLEAN,
         CONSTRAINT fk_departement_id FOREIGN KEY (departement_id) REFERENCES Departements (id),
         CONSTRAINT check_rank CHECK (
             employe_rank IN (1, 2, 3, 4, 5)

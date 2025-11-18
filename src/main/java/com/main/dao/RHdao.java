@@ -3,29 +3,33 @@ package com.main.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+
+import org.mindrot.jbcrypt.BCrypt;
 
 import com.main.model.Departement;
 import com.main.model.Employe;
 import com.main.model.Payslip;
 import com.main.model.Project;
+import com.main.util.DatabaseConnection;
 
 import jakarta.persistence.*;
 
-public class RHdao {
+public class RHDAO {
 
     private static final String URL = "jdbc:mysql://localhost:3306/RHDATABASE";
     private static final String UTILISATEUR = "root";
     private static final String MOT_DE_PASSE = "";
     private final EntityManagerFactory emf;
 
-    public RHdao() {
+    public RHDAO() {
         this.emf = Persistence.createEntityManagerFactory("RHDATABASE");
     }
 
-    //#region GET DATA
-    //#region GET ALL DATA
+    // #region GET DATA
+    // #region GET ALL DATA
     public List<Employe> getAllEmployees() {
         EntityManager em = emf.createEntityManager();
         try {
@@ -35,6 +39,7 @@ public class RHdao {
             em.close();
         }
     }
+
     public List<Departement> getAllDepartements() {
         EntityManager em = emf.createEntityManager();
         try {
@@ -44,6 +49,7 @@ public class RHdao {
             em.close();
         }
     }
+
     public List<Project> getAllProjects() {
         EntityManager em = emf.createEntityManager();
         try {
@@ -53,6 +59,7 @@ public class RHdao {
             em.close();
         }
     }
+
     public List<Payslip> getAllPayslips() {
         EntityManager em = emf.createEntityManager();
         try {
@@ -62,9 +69,9 @@ public class RHdao {
             em.close();
         }
     }
-    //#endregion
+    // #endregion
 
-    //#region GET DATA WHERE "query"
+    // #region GET DATA WHERE "query"
     public Employe getEmploye(String queryString) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -74,15 +81,18 @@ public class RHdao {
             em.close();
         }
     }
+
     public Departement getDepartement(String queryString) {
         EntityManager em = emf.createEntityManager();
         try {
-            TypedQuery<Departement> query = em.createQuery("SELECT * FROM Departements WHERE " + queryString, Departement.class);
+            TypedQuery<Departement> query = em.createQuery("SELECT * FROM Departements WHERE " + queryString,
+                    Departement.class);
             return query.getSingleResultOrNull();
         } finally {
             em.close();
         }
     }
+
     public Project getProject(String queryString) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -92,6 +102,7 @@ public class RHdao {
             em.close();
         }
     }
+
     public Payslip getPayslip(String queryString) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -101,9 +112,9 @@ public class RHdao {
             em.close();
         }
     }
-    //#endregion
+    // #endregion
 
-    //#region GET ALL DATA WHERE "query"
+    // #region GET ALL DATA WHERE "query"
     public List<Employe> getEmployees(String queryString) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -113,15 +124,18 @@ public class RHdao {
             em.close();
         }
     }
+
     public List<Departement> getDepartements(String queryString) {
         EntityManager em = emf.createEntityManager();
         try {
-            TypedQuery<Departement> query = em.createQuery("SELECT * FROM Departements WHERE " + queryString, Departement.class);
+            TypedQuery<Departement> query = em.createQuery("SELECT * FROM Departements WHERE " + queryString,
+                    Departement.class);
             return query.getResultList();
         } finally {
             em.close();
         }
     }
+
     public List<Project> getProjects(String queryString) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -131,6 +145,7 @@ public class RHdao {
             em.close();
         }
     }
+
     public List<Payslip> getPayslips(String queryString) {
         EntityManager em = emf.createEntityManager();
         try {
@@ -140,108 +155,181 @@ public class RHdao {
             em.close();
         }
     }
-    //#endregion
-    //#endregion
+    // #endregion
+    // #endregion
 
-    //#region UPDATE DATA
-    //#region UPDATE ALL DATA WHERE "query"
+    // #region UPDATE DATA
+    // #region UPDATE ALL DATA WHERE "query"
     public void updateAllEmployees(String query, String changes) {
         try {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
-            PreparedStatement preparedStatement = con.prepareStatement("UPDATE Employees WHERE " + query + " SET " + changes);
+            PreparedStatement preparedStatement = con
+                    .prepareStatement("UPDATE Employees WHERE " + query + " SET " + changes);
             preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     public void updateAllDepartements(String query, String changes) {
         try {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
-            PreparedStatement preparedStatement = con.prepareStatement("UPDATE Departements WHERE " + query + " SET " + changes);
+            PreparedStatement preparedStatement = con
+                    .prepareStatement("UPDATE Departements WHERE " + query + " SET " + changes);
             preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     public void updateAllProjects(String query, String changes) {
         try {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
-            PreparedStatement preparedStatement = con.prepareStatement("UPDATE Projects WHERE " + query + " SET " + changes);
+            PreparedStatement preparedStatement = con
+                    .prepareStatement("UPDATE Projects WHERE " + query + " SET " + changes);
             preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     public void updateAllPayslips(String query, String changes) {
         try {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
-            PreparedStatement preparedStatement = con.prepareStatement("UPDATE Payslips WHERE " + query + " SET " + changes);
+            PreparedStatement preparedStatement = con
+                    .prepareStatement("UPDATE Payslips WHERE " + query + " SET " + changes);
             preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    //#endregion
-    
-    //#region UPDATE DATA WHERE "query"
+    // #endregion
+
+    // #region UPDATE DATA WHERE "query"
     public void updateEmploye(int id, String query, String changes) {
         try {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
-            PreparedStatement preparedStatement = con.prepareStatement("UPDATE Employees WHERE id = " + id + " AND " + query + " SET " + changes);
+            PreparedStatement preparedStatement = con
+                    .prepareStatement("UPDATE Employees SET " + changes + "WHERE id = " + id + " AND " + query);
             preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     public void updateDepartement(int id, String query, String changes) {
         try {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
-            PreparedStatement preparedStatement = con.prepareStatement("UPDATE Departements WHERE id = " + id + " AND " + query + " SET " + changes);
+            PreparedStatement preparedStatement = con
+                    .prepareStatement("UPDATE Departements SET " + changes + "WHERE id = " + id + " AND " + query);
             preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     public void updateProject(int id, String query, String changes) {
         try {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
-            PreparedStatement preparedStatement = con.prepareStatement("UPDATE Projects WHERE id = " + id + " AND " + query + " SET " + changes);
+            PreparedStatement preparedStatement = con
+                    .prepareStatement("UPDATE Projects SET " + changes + "WHERE id = " + id + " AND " + query);
             preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
+
     public void updatePayslip(int id, String query, String changes) {
         try {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
-            PreparedStatement preparedStatement = con.prepareStatement("UPDATE Payslips WHERE id = " + id + " AND " + query + " SET " + changes);
+            PreparedStatement preparedStatement = con
+                    .prepareStatement("UPDATE Payslips SET " + changes + "WHERE id = " + id + " AND " + query);
             preparedStatement.executeQuery();
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-    //#endregion
-    //#endregion
+    // #endregion
 
-    //#region CREATE DATA
-    public void save(Object data) {
+    // #region UPDATE BY ID DATA WHERE "query"
+    public boolean updateEmployeById(int id, String changes) {
+        try {
+            Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
+            PreparedStatement preparedStatement = con
+                    .prepareStatement("UPDATE Employees SET " + changes + "WHERE id = " + id);
+            preparedStatement.executeQuery();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updateDepartementById(int id, String changes) {
+        try {
+            Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
+            PreparedStatement preparedStatement = con
+                    .prepareStatement("UPDATE Departements SET " + changes + "WHERE id = " + id);
+            preparedStatement.executeQuery();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updateProjectById(int id, String changes) {
+        try {
+            Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
+            PreparedStatement preparedStatement = con
+                    .prepareStatement("UPDATE Projects SET " + changes + "WHERE id = " + id);
+            preparedStatement.executeQuery();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean updatePayslipById(int id, String changes) {
+        try {
+            Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
+            PreparedStatement preparedStatement = con
+                    .prepareStatement("UPDATE Payslips SET " + changes + "WHERE id = " + id);
+            preparedStatement.executeQuery();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    // #endregion
+
+    // #endregion
+
+    // #region CREATE DATA
+    public boolean save(Object data) {
+        Boolean result;
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         try {
             em.persist(data);
             em.getTransaction().commit();
+            result = true;
         } catch (Exception e) {
             if (em.getTransaction().isActive()) {
                 em.getTransaction().rollback();
             }
+            result = false;
             throw e;
         } finally {
             em.close();
         }
+        return result;
     }
-    //#endregion
+    // #endregion
 
-    //#region DELETE DATA
+    // #region DELETE DATA
     public void deleteEmploye(int id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -260,6 +348,7 @@ public class RHdao {
             em.close();
         }
     }
+
     public void deleteDepartement(int id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -278,6 +367,7 @@ public class RHdao {
             em.close();
         }
     }
+
     public void deleteProject(int id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -296,6 +386,7 @@ public class RHdao {
             em.close();
         }
     }
+
     public void deletePayslip(int id) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -314,5 +405,43 @@ public class RHdao {
             em.close();
         }
     }
-    //#endregion
+    // #endregion
+
+    // #region AUTH
+    public String hashPassword(String plainPassword) {
+        return BCrypt.hashpw(plainPassword, BCrypt.gensalt(12));
+    }
+
+    public Employe authenticate(String username, String password) throws SQLException {
+        Employe user = getEmploye("username = " + username);
+        String hashedPassword = user.getPassword_hash();
+
+        // Vérification du mot de passe
+        if (BCrypt.checkpw(password, hashedPassword)) {
+            updateEmployeById(user.getId(), "lastLogin = NOW()");
+            return user;
+        }
+
+        return null;
+    }
+    // #endregion
+
+    // #region OTHER
+    public boolean usernameExists(String username) throws SQLException {
+        String sql = "SELECT COUNT(*) FROM users WHERE username = ?";
+
+        try (Connection conn = DatabaseConnection.getConnection();
+                PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, username);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return rs.getInt(1) > 0;
+            }
+        }
+        return false;
+    }
+
+    // #endregion
 }

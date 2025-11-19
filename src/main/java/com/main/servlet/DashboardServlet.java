@@ -19,13 +19,13 @@ public class DashboardServlet extends HttpServlet {
         // Récupérer l'utilisateur connecté depuis la session
         HttpSession session = request.getSession(false);
 
-        if (session == null || session.getAttribute("currentEmploye") == null) {
+        if (session == null || session.getAttribute("currentUser") == null) {
             // Pas de session ou utilisateur non connecté
             response.sendRedirect(request.getContextPath() + "/login.jsp");
             return;
         }
 
-        Employe currentEmploye = (Employe) session.getAttribute("currentEmploye");
+        Employe currentEmploye = (Employe) session.getAttribute("currentUser");
 
         // Logger l'accès
         System.out.println("Dashboard accessed by: " + currentEmploye.getUsername() + " (" + currentEmploye.getRole() + ")");

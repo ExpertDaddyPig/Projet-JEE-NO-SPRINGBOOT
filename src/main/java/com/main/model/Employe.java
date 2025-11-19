@@ -53,7 +53,7 @@ public class Employe {
     @Column(name = "email", length = 50, nullable = false)
     private String email;
 
-    @Column(name = "active", nullable = false)
+    @Column(name = "isActive", nullable = false)
     private boolean active;
 
     @Column(name = "createdAt")
@@ -140,6 +140,25 @@ public class Employe {
     }
 
     public Role getRole() {
+        if (role == null) {
+            switch (employe_rank) {
+                case 1:
+                    setRole(Role.EMPLOYE);
+                    break;
+                case 2:
+                    setRole(Role.CHEF_PROJET);
+                    break;
+                case 3:
+                    setRole(Role.CHEF_DEPARTEMENT);
+                    break;
+                case 4:
+                    setRole(Role.ADMINISTRATEUR);
+                    break;
+                default:
+                    setRole(Role.EMPLOYE);
+                    break;
+            }
+        }
         return role;
     }
 

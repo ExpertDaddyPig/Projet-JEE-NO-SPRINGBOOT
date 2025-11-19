@@ -13,6 +13,7 @@ public enum Role {
     private final int level; // Niveau hiérarchique
     private final String description;
 
+
     Role(String displayName, int level, String description) {
         this.displayName = displayName;
         this.level = level;
@@ -42,7 +43,8 @@ public enum Role {
      * Convertit une chaîne en Role
      */
     public static Role fromString(String roleStr) {
-        if (roleStr == null) return null;
+        if (roleStr == null)
+            return null;
 
         for (Role r : Role.values()) {
             if (r.name().equalsIgnoreCase(roleStr) ||

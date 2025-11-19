@@ -19,7 +19,7 @@
 //      */
 //     public boolean createEmploye(Employe user) throws SQLException {
 //         String sql = "INSERT INTO users (username, password, email, role, employee_id, active, created_at) " +
-//                 "VALUES (?, ?, ?, ?, ?, ?, NOW())";
+//                 "VALUES (?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP())";
 
 //         try (Connection conn = DatabaseConnection.getConnection();
 //              PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
@@ -233,7 +233,7 @@
 //      * Met à jour la date de dernière connexion
 //      */
 //     private void updateLastLogin(Long userId) throws SQLException {
-//         String sql = "UPDATE users SET last_login = NOW() WHERE id = ?";
+//         String sql = "UPDATE users SET last_login = CURRENT_TIMESTAMP() WHERE id = ?";
 
 //         try (Connection conn = DatabaseConnection.getConnection();
 //              PreparedStatement stmt = conn.prepareStatement(sql)) {

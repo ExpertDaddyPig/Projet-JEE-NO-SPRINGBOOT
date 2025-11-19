@@ -49,7 +49,7 @@ public class AuthenticationFilter implements Filter {
         // Vérifier si l'utilisateur est connecté
         Employe currentEmploye = null;
         if (session != null) {
-            currentEmploye = (Employe) session.getAttribute("currentEmploye");
+            currentEmploye = (Employe) session.getAttribute("currentUser");
         }
 
         if (isPublicResource || currentEmploye != null) {

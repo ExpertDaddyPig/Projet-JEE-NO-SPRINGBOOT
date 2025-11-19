@@ -3,8 +3,11 @@ CREATE DATABASE IF NOT EXISTS rhdatabase;
 USE rhdatabase;
 
 DROP TABLE IF EXISTS Departements;
+
 DROP TABLE IF EXISTS Employees;
+
 DROP TABLE IF EXISTS Projects;
+
 DROP TABLE IF EXISTS Payslips;
 
 CREATE TABLE
@@ -31,11 +34,9 @@ CREATE TABLE
         password_hash VARCHAR(255) NOT NULL,
         createdAt DATE,
         lastLogin DATE,
-        active BOOLEAN,
+        isActive BOOLEAN,
         CONSTRAINT fk_departement_id FOREIGN KEY (departement_id) REFERENCES Departements (id),
-        CONSTRAINT check_rank CHECK (
-            employe_rank IN (1, 2, 3, 4, 5)
-        )
+        CONSTRAINT check_rank CHECK (employe_rank IN (1, 2, 3, 4))
     );
 
 CREATE TABLE
@@ -58,4 +59,31 @@ CREATE TABLE
         primes INT,
         deductions INT,
         CONSTRAINT fk_employe_id FOREIGN KEY (employe_id) REFERENCES Employees (id)
+    );
+
+INSERT INTO
+    Departements (departement_name, employees)
+VALUES
+    ("Administration", "0");
+
+INSERT INTO
+    Employees
+VALUES
+    (
+        NULL,
+        1,
+        'System',
+        'Admin',
+        'Other',
+        'A1000',
+        'All Projects',
+        'Administrator',
+        4,
+        40,
+        'admin@yourcompany.com',
+        'sys_admin',
+        '$2a$12$b7Acw.axAnGB4Vhng1yPUOLtvC1GKx0nuz/IBALwrThaS6DH6YpaS',
+        CURRENT_TIMESTAMP(),
+        CURRENT_TIMESTAMP(),
+        TRUE
     );

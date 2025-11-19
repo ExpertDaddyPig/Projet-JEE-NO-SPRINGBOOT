@@ -31,128 +31,92 @@ public class RHDAO {
     // #region GET DATA
     // #region GET ALL DATA
     public List<Employe> getAllEmployees() {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<Employe> query = em.createQuery("SELECT * FROM Employees", Employe.class);
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Employe> query = (TypedQuery<Employe>) em.createNativeQuery("SELECT * FROM Employees", Employe.class);
             return query.getResultList();
-        } finally {
-            em.close();
         }
     }
 
     public List<Departement> getAllDepartements() {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<Departement> query = em.createQuery("SELECT * FROM Departements", Departement.class);
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Departement> query = (TypedQuery<Departement>) em.createNativeQuery("SELECT * FROM Departements", Departement.class);
             return query.getResultList();
-        } finally {
-            em.close();
         }
     }
 
     public List<Project> getAllProjects() {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<Project> query = em.createQuery("SELECT * FROM Projects", Project.class);
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Project> query = (TypedQuery<Project>) em.createNativeQuery("SELECT * FROM Projects", Project.class);
             return query.getResultList();
-        } finally {
-            em.close();
         }
     }
 
     public List<Payslip> getAllPayslips() {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<Payslip> query = em.createQuery("SELECT * FROM Payslips", Payslip.class);
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Payslip> query = (TypedQuery<Payslip>) em.createNativeQuery("SELECT * FROM Payslips", Payslip.class);
             return query.getResultList();
-        } finally {
-            em.close();
         }
     }
     // #endregion
 
     // #region GET DATA WHERE "query"
     public Employe getEmploye(String queryString) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<Employe> query = em.createQuery("SELECT * FROM Employees WHERE " + queryString, Employe.class);
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Employe> query = (TypedQuery<Employe>) em.createNativeQuery("SELECT * FROM Employees WHERE " + queryString, Employe.class);
             return query.getSingleResultOrNull();
-        } finally {
-            em.close();
         }
     }
 
     public Departement getDepartement(String queryString) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<Departement> query = em.createQuery("SELECT * FROM Departements WHERE " + queryString,
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Departement> query = (TypedQuery<Departement>) em.createNativeQuery("SELECT * FROM Departements WHERE " + queryString,
                     Departement.class);
             return query.getSingleResultOrNull();
-        } finally {
-            em.close();
         }
     }
 
     public Project getProject(String queryString) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<Project> query = em.createQuery("SELECT * FROM Projects WHERE " + queryString, Project.class);
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Project> query = (TypedQuery<Project>) em.createNativeQuery("SELECT * FROM Projects WHERE " + queryString, Project.class);
             return query.getSingleResultOrNull();
-        } finally {
-            em.close();
         }
     }
 
     public Payslip getPayslip(String queryString) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<Payslip> query = em.createQuery("SELECT * FROM Payslips WHERE " + queryString, Payslip.class);
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Payslip> query = (TypedQuery<Payslip>) em.createNativeQuery("SELECT * FROM Payslips WHERE " + queryString, Payslip.class);
             return query.getSingleResultOrNull();
-        } finally {
-            em.close();
         }
     }
     // #endregion
 
     // #region GET ALL DATA WHERE "query"
     public List<Employe> getEmployees(String queryString) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<Employe> query = em.createQuery("SELECT * FROM Employees WHERE " + queryString, Employe.class);
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Employe> query = (TypedQuery<Employe>) em.createNativeQuery("SELECT * FROM Employees WHERE " + queryString, Employe.class);
             return query.getResultList();
-        } finally {
-            em.close();
         }
     }
 
     public List<Departement> getDepartements(String queryString) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<Departement> query = em.createQuery("SELECT * FROM Departements WHERE " + queryString,
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Departement> query = (TypedQuery<Departement>) em.createNativeQuery("SELECT * FROM Departements WHERE " + queryString,
                     Departement.class);
             return query.getResultList();
-        } finally {
-            em.close();
         }
     }
 
     public List<Project> getProjects(String queryString) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<Project> query = em.createQuery("SELECT * FROM Projects WHERE " + queryString, Project.class);
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Project> query = (TypedQuery<Project>) em.createNativeQuery("SELECT * FROM Projects WHERE " + queryString, Project.class);
             return query.getResultList();
-        } finally {
-            em.close();
         }
     }
 
     public List<Payslip> getPayslips(String queryString) {
-        EntityManager em = emf.createEntityManager();
-        try {
-            TypedQuery<Payslip> query = em.createQuery("SELECT * FROM Payslips WHERE " + queryString, Payslip.class);
+        try (EntityManager em = emf.createEntityManager()) {
+            TypedQuery<Payslip> query = (TypedQuery<Payslip>) em.createNativeQuery("SELECT * FROM Payslips WHERE " + queryString, Payslip.class);
             return query.getResultList();
-        } finally {
-            em.close();
         }
     }
     // #endregion
@@ -413,12 +377,12 @@ public class RHDAO {
     }
 
     public Employe authenticate(String username, String password) throws SQLException {
-        Employe user = getEmploye("username = " + username);
+        Employe user = getEmploye("username = \"" + username + "\"");
         String hashedPassword = user.getPassword_hash();
 
         // Vérification du mot de passe
         if (BCrypt.checkpw(password, hashedPassword)) {
-            updateEmployeById(user.getId(), "lastLogin = NOW()");
+            updateEmployeById(user.getId(), "lastLogin = CURRENT_TIMESTAMP()");
             return user;
         }
 

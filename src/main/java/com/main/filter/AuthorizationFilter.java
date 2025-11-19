@@ -40,7 +40,7 @@ public class AuthorizationFilter implements Filter {
         // Récupérer l'utilisateur courant
         Employe currentEmploye = null;
         if (session != null) {
-            currentEmploye = (Employe) session.getAttribute("currentEmploye");
+            currentEmploye = (Employe) session.getAttribute("currentUser");
         }
 
         // Si l'utilisateur n'est pas connecté, laisser AuthenticationFilter gérer

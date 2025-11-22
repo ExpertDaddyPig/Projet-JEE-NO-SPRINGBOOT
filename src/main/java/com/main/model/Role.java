@@ -13,7 +13,6 @@ public enum Role {
     private final int level; // Niveau hiérarchique
     private final String description;
 
-
     Role(String displayName, int level, String description) {
         this.displayName = displayName;
         this.level = level;

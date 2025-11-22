@@ -17,7 +17,9 @@ public class Departement {
     public Departement() {
     }
 
-    public Departement(String name) {
+    public Departement(int id, String name, String employees) {
+        this.id = id;
         this.departement_name = name;
+        this.employees = employees;
     }
 }

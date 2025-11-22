@@ -1,6 +1,5 @@
 package com.main.model;
 
-import java.text.*;
 import java.time.LocalDate;
 import java.util.*;
 
@@ -9,8 +8,6 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "employees")
 public class Employe {
-
-    private String candidateChars = "1234567890";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -99,6 +96,7 @@ public class Employe {
     }
 
     private String generateRegistrationNumber() {
+        String candidateChars = "1234567890";
         StringBuilder generated = new StringBuilder();
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
@@ -210,6 +208,14 @@ public class Employe {
                 return true;
         }
         return false;
+    }
+
+    public void setDepartement_id(int departement_id) {
+        this.departement_id = departement_id;
+    }
+
+    public int getDepartement_id() {
+        return departement_id;
     }
 
     public String getProjects() {

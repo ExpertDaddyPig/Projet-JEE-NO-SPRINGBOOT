@@ -75,14 +75,20 @@ public class UserManagementServlet extends HttpServlet {
 
         List<Employe> users = rhdao.getAllEmployees();
         request.setAttribute("users", users);
-        request.getRequestDispatcher("/WEB-INF/views/users/list.jsp").forward(request, response);
+        request.setAttribute("departments", rhdao.getAllDepartements());
+        request.setAttribute("projectList", rhdao.getAllProjects());
+        request.setAttribute("roles", Role.values());
+        request.getRequestDispatcher("/employees.jsp").forward(request, response);
     }
 
     private void showAddForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        request.setAttribute("users", rhdao.getAllEmployees());
+        request.setAttribute("departments", rhdao.getAllDepartements());
+        request.setAttribute("projectList", rhdao.getAllProjects());
         request.setAttribute("roles", Role.values());
-        request.getRequestDispatcher("/WEB-INF/views/users/add.jsp").forward(request, response);
+        request.getRequestDispatcher("/employees.jsp").forward(request, response);
     }
 
     private void showEditForm(HttpServletRequest request, HttpServletResponse response)
@@ -110,13 +116,23 @@ public class UserManagementServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
 
         // Récupération des paramètres
+        String first_name = request.getParameter("firstName");
+        String last_name = request.getParameter("lastName");
+        int age = Integer.parseInt(request.getParameter("age"));
+        String gender = request.getParameter("gender");
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         String confirmPassword = request.getParameter("confirmPassword");
         String email = request.getParameter("email");
         String roleStr = request.getParameter("role");
-        String employeeIdStr = request.getParameter("employeeId");
         String activeStr = request.getParameter("active");
+        int departementId = Integer.parseInt(request.getParameter("departement"));
+        String jobName = request.getParameter("jobName");
+        String[] projectArray = request.getParameterValues("projects");
+        String projects = "";
+        if (projectArray != null && projectArray.length > 0) {
+            projects = String.join(", ", projectArray); // Crée une string "Proj1, Proj2"
+        }
 
         // Validation
         StringBuilder errors = new StringBuilder();
@@ -145,22 +161,23 @@ public class UserManagementServlet extends HttpServlet {
 
         if (errors.length() > 0) {
             request.setAttribute("errorMessage", errors.toString());
+            request.setAttribute("firstName", first_name);
+            request.setAttribute("lastName", last_name);
+            request.setAttribute("gender", gender);
+            request.setAttribute("age", age);
             request.setAttribute("username", username);
             request.setAttribute("email", email);
             request.setAttribute("roles", Role.values());
-            request.getRequestDispatcher("/WEB-INF/views/users/add.jsp").forward(request, response);
+            request.getRequestDispatcher("/employees.jsp").forward(request, response);
             return;
         }
 
         // Création de l'utilisateur
-        Employe newUser = new Employe();
-        newUser.setUsername(username.trim());
-        newUser.setPassword_hash(rhdao.hashPassword(password));
-        newUser.setEmail(email.trim());
-        newUser.setRole(Role.fromString(roleStr));
+        Employe newUser = new Employe(first_name, last_name, gender, jobName, departementId,
+                Role.fromString(roleStr).getLevel(), age);
 
-        if (employeeIdStr != null && !employeeIdStr.trim().isEmpty()) {
-            newUser.setId(Integer.parseInt(employeeIdStr));
+        if (projects != null) {
+            System.out.println(projects);
         }
 
         newUser.setActive(activeStr != null && activeStr.equals("on"));
@@ -171,7 +188,7 @@ public class UserManagementServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/users?success=add");
         } else {
             request.setAttribute("errorMessage", "Erreur lors de la création de l'utilisateur.");
-            request.getRequestDispatcher("/WEB-INF/views/users/add.jsp").forward(request, response);
+            request.getRequestDispatcher("/employees.jsp").forward(request, response);
         }
     }
 
@@ -182,7 +199,6 @@ public class UserManagementServlet extends HttpServlet {
         String username = request.getParameter("username");
         String email = request.getParameter("email");
         String roleStr = request.getParameter("role");
-        String employeeIdStr = request.getParameter("employeeId");
         String activeStr = request.getParameter("active");
 
         // Validation
@@ -201,7 +217,8 @@ public class UserManagementServlet extends HttpServlet {
 
             user.setActive(activeStr != null && activeStr.equals("on"));
 
-            boolean success = rhdao.updateEmployeById(userId, "username = " + username + ", email = " + email); //TODO Employe rank conversion to INT
+            boolean success = rhdao.updateEmployeById(userId,
+                    "username = " + username + ", email = " + email + ", employee_rank = " + user.getRole().getLevel());
 
             if (success) {
                 response.sendRedirect(request.getContextPath() + "/users?success=update");

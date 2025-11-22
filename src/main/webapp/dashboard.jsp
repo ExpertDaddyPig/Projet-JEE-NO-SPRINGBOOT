@@ -183,7 +183,7 @@
 
         <div class="menu-grid">
             <!-- Menu accessible à tous -->
-            <a href="${pageContext.request.contextPath}/profile" class="menu-card">
+            <a href="${pageContext.request.contextPath}/profile.jsp" class="menu-card">
                 <div class="menu-icon">👤</div>
                 <div class="menu-title">Mon Profil</div>
                 <div class="menu-description">Consulter et modifier vos informations</div>
@@ -191,13 +191,13 @@
 
             <!-- Menu pour Admin et Chefs de département -->
             <c:if test="${currentUser.role == 'ADMINISTRATEUR' || currentUser.role == 'CHEF_DEPARTEMENT'}">
-                <a href="${pageContext.request.contextPath}/employees" class="menu-card">
+                <a href="${pageContext.request.contextPath}/users" class="menu-card">
                     <div class="menu-icon">👥</div>
                     <div class="menu-title">Employés</div>
                     <div class="menu-description">Gérer les employés de l'entreprise</div>
                 </a>
 
-                <a href="${pageContext.request.contextPath}/departments" class="menu-card">
+                <a href="${pageContext.request.contextPath}/departments.jsp" class="menu-card">
                     <div class="menu-icon">🏢</div>
                     <div class="menu-title">Départements</div>
                     <div class="menu-description">Gérer les départements</div>
@@ -206,7 +206,7 @@
 
             <!-- Menu pour Admin, Chefs de département et Chefs de projet -->
             <c:if test="${currentUser.role == 'ADMINISTRATEUR' || currentUser.role == 'CHEF_DEPARTEMENT' || currentUser.role == 'CHEF_PROJET'}">
-                <a href="${pageContext.request.contextPath}/projects" class="menu-card">
+                <a href="${pageContext.request.contextPath}/projects.jsp" class="menu-card">
                     <div class="menu-icon">📊</div>
                     <div class="menu-title">Projets</div>
                     <div class="menu-description">Gérer les projets de l'entreprise</div>

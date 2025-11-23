@@ -378,6 +378,7 @@ public class RHDAO {
 
     public Employe authenticate(String username, String password) throws SQLException {
         Employe user = getEmploye("username = \"" + username + "\"");
+        if (user == null) return null;
         String hashedPassword = user.getPassword_hash();
 
         // Vérification du mot de passe
@@ -385,14 +386,13 @@ public class RHDAO {
             updateEmployeById(user.getId(), "lastLogin = CURRENT_TIMESTAMP()");
             return user;
         }
-
         return null;
     }
     // #endregion
 
     // #region OTHER
     public boolean usernameExists(String username) throws SQLException {
-        String sql = "SELECT COUNT(*) FROM users WHERE username = ?";
+        String sql = "SELECT COUNT(*) FROM Employees WHERE username = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {

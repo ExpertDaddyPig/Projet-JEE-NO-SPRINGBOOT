@@ -65,25 +65,26 @@ public class Employe {
     }
 
     // Creation of one employe with no additionnal information
-    public Employe(String first_name, String last_name, String gender, int employe_rank, int age) {
+    public Employe(String first_name, String last_name, String email, String gender, int employe_rank, int age) {
         this.first_name = first_name;
         this.last_name = last_name;
+        this.email = email;
         this.gender = gender;
         this.age = age;
         this.employe_rank = employe_rank;
         this.registration_number = generateRegistrationNumber();
     }
 
-    public Employe(String first_name, String last_name, String gender, String job_name, int departement_id,
+    public Employe(String first_name, String last_name, String email, String gender, String job_name, int departement_id,
             int employe_rank, int age) {
-        this(first_name, last_name, gender, employe_rank, age);
+        this(first_name, last_name, email, gender, employe_rank, age);
         this.job_name = job_name;
         this.departement_id = departement_id;
     }
 
-    public Employe(String first_name, String last_name, String gender, String job_name, int projects_id[],
+    public Employe(String first_name, String last_name, String email, String gender, String job_name, int projects_id[],
             int departement_id, int employe_rank, int age) {
-        this(first_name, last_name, gender, employe_rank, age);
+        this(first_name, last_name, email, gender, employe_rank, age);
         this.job_name = job_name;
         this.departement_id = departement_id;
         this.employe_rank = employe_rank;
@@ -113,6 +114,62 @@ public class Employe {
         this.id = id;
     }
 
+    public String getFirst_name() {
+        return first_name;
+    }
+
+    public void setFirst_name(String first_name) {
+        this.first_name = first_name;
+    }
+
+    public String getLast_name() {
+        return last_name;
+    }
+
+    public void setLast_name(String last_name) {
+        this.last_name = last_name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public int getEmploye_rank() {
+        return employe_rank;
+    }
+
+    public void setEmploye_rank(int employe_rank) {
+        this.employe_rank = employe_rank;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getJob_name() {
+        return job_name;
+    }
+
+    public void setJob_name(String job_name) {
+        this.job_name = job_name;
+    }
+
+    public String getRegistration_number() {
+        return registration_number;
+    }
+
+    public void setRegistration_number(String registration_number) {
+        this.registration_number = registration_number;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -140,9 +197,6 @@ public class Employe {
     public Role getRole() {
         if (role == null) {
             switch (employe_rank) {
-                case 1:
-                    setRole(Role.EMPLOYE);
-                    break;
                 case 2:
                     setRole(Role.CHEF_PROJET);
                     break;
@@ -233,20 +287,21 @@ public class Employe {
     public String toString() {
         return "Employe{" +
                 "id=" + id +
-                ", username='" + username + '\'' +
+                ", registration_number='" + registration_number + '\'' +
+                ", first_name='" + first_name + '\'' +
+                ", last_name='" + last_name + '\'' +
                 ", email='" + email + '\'' +
-                ", role=" + role +
+                ", username='" + username + '\'' +
+                ", job_name='" + job_name + '\'' +
+                ", departement_id=" + departement_id +
+                ", gender='" + gender + '\'' +
+                ", age=" + age +
+                ", employe_rank=" + employe_rank +
+                ", role=" + getRole() +
                 ", active=" + active +
-                ", active=" + active +
-                ", active=" + active +
-                ", active=" + active +
-                ", active=" + active +
-                ", active=" + active +
-                ", active=" + active +
-                ", active=" + active +
-                ", active=" + active +
-                ", active=" + active +
-                ", active=" + active +
+                ", createdAt=" + createdAt +
+                ", lastLogin=" + lastLogin +
+                ", projects='" + projects + '\'' +
                 '}';
     }
 

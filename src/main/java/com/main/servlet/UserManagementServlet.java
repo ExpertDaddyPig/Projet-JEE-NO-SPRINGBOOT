@@ -74,6 +74,7 @@ public class UserManagementServlet extends HttpServlet {
             throws SQLException, ServletException, IOException {
 
         List<Employe> users = rhdao.getAllEmployees();
+
         request.setAttribute("users", users);
         request.setAttribute("departments", rhdao.getAllDepartements());
         request.setAttribute("projectList", rhdao.getAllProjects());
@@ -106,7 +107,7 @@ public class UserManagementServlet extends HttpServlet {
         if (user != null) {
             request.setAttribute("user", user);
             request.setAttribute("roles", Role.values());
-            request.getRequestDispatcher("/WEB-INF/views/users/edit.jsp").forward(request, response);
+            request.getRequestDispatcher("/users/edit").forward(request, response);
         } else {
             response.sendRedirect(request.getContextPath() + "/users");
         }
@@ -133,30 +134,38 @@ public class UserManagementServlet extends HttpServlet {
         if (projectArray != null && projectArray.length > 0) {
             projects = String.join(", ", projectArray); // Crée une string "Proj1, Proj2"
         }
+        Role role = Role.fromString(roleStr);
+        Employe currentUser = (Employe) request.getSession().getAttribute("currentUser");
 
+
+        
         // Validation
         StringBuilder errors = new StringBuilder();
-
+        
         if (username == null || username.trim().isEmpty()) {
             errors.append("Le nom d'utilisateur est requis. ");
         } else if (rhdao.usernameExists(username.trim())) {
             errors.append("Ce nom d'utilisateur existe déjà. ");
         }
-
+        
         if (password == null || password.length() < 6) {
             errors.append("Le mot de passe doit contenir au moins 6 caractères. ");
         }
-
+        
         if (!password.equals(confirmPassword)) {
             errors.append("Les mots de passe ne correspondent pas. ");
         }
-
+        
         if (email == null || !email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
             errors.append("Email invalide. ");
         }
-
+        
         if (roleStr == null || Role.fromString(roleStr) == null) {
             errors.append("Rôle invalide. ");
+        }
+
+        if (role == Role.ADMINISTRATEUR && currentUser.getRole() != Role.ADMINISTRATEUR) {
+            errors.append("Seuls les administrateurs peuvent ajouter des administrateurs. ");
         }
 
         if (errors.length() > 0) {
@@ -173,7 +182,7 @@ public class UserManagementServlet extends HttpServlet {
         }
 
         // Création de l'utilisateur
-        Employe newUser = new Employe(first_name, last_name, gender, jobName, departementId,
+        Employe newUser = new Employe(first_name, last_name, email, gender, jobName, departementId,
                 Role.fromString(roleStr).getLevel(), age);
 
         if (projects != null) {
@@ -181,10 +190,13 @@ public class UserManagementServlet extends HttpServlet {
         }
 
         newUser.setActive(activeStr != null && activeStr.equals("on"));
+        newUser.setUsername(username);
+        newUser.setPassword_hash(rhdao.hashPassword(password));
 
         boolean success = rhdao.save(newUser);
 
         if (success) {
+            System.out.println("SUCCESS");
             response.sendRedirect(request.getContextPath() + "/users?success=add");
         } else {
             request.setAttribute("errorMessage", "Erreur lors de la création de l'utilisateur.");

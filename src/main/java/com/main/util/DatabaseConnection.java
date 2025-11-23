@@ -9,8 +9,7 @@ import java.sql.SQLException;
  */
 public class DatabaseConnection {
 
-    // ⚠️ IMPORTANT : Remplacez ces valeurs par vos paramètres MySQL réels
-    private static final String URL = "jdbc:mysql://localhost:3306/gestion_rh?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
+    private static final String URL = "jdbc:mysql://localhost:3306/RHDATABASE?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true";
     private static final String USER = "root";
     private static final String PASSWORD = "";  // ← METTEZ VOTRE MOT DE PASSE MYSQL ICI (vide si pas de password)
 

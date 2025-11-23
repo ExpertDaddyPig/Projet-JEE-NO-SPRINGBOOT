@@ -80,7 +80,7 @@ VALUES
         'Administrator',
         4,
         40,
-        'admin@yourcompany.com',
+        'admin@admin.com',
         'sys_admin',
         '$2a$12$b7Acw.axAnGB4Vhng1yPUOLtvC1GKx0nuz/IBALwrThaS6DH6YpaS',
         CURRENT_TIMESTAMP(),

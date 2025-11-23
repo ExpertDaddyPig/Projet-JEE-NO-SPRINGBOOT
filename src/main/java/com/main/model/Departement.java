@@ -2,6 +2,8 @@ package com.main.model;
 
 import jakarta.persistence.*;
 
+@Entity
+@Table(name = "departements")
 public class Departement {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,5 +23,29 @@ public class Departement {
         this.id = id;
         this.departement_name = name;
         this.employees = employees;
+    }
+
+    public String getDepartement_name() {
+        return departement_name;
+    }
+
+    public String getEmployees() {
+        return employees;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setDepartement_name(String departement_name) {
+        this.departement_name = departement_name;
+    }
+
+    public void setEmployees(String employees) {
+        this.employees = employees;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

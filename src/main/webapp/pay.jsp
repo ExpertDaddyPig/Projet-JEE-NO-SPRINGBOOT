@@ -239,7 +239,7 @@
         <div class="navbar-brand">Gestion RH - Fiches de Paie</div>
         <div class="navbar-links">
             <a href="${pageContext.request.contextPath}/dashboard">Tableau de bord</a>
-            <a href="${pageContext.request.contextPath}/employe.jsp">Employés</a>
+            <a href="${pageContext.request.contextPath}/users">Employés</a>
             <a href="${pageContext.request.contextPath}/projects">Projets</a>
             <a href="${pageContext.request.contextPath}/logout">Déconnexion</a>
         </div>

@@ -1,0 +1,26 @@
+package com.main.model;
+
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "Departements")
+
+public class Departement {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private int id;
+
+    @Column(name = "departement_name", length = 50, nullable = false)
+    private String departement_name;
+
+    @Column(name = "employees", length = 1000, nullable = true)
+    private String employees;
+
+    public Departement() {
+    }
+
+    public Departement(String name) {
+        this.departement_name = name;
+    }
+}

@@ -324,8 +324,10 @@
                 <!-- En-tête de la page -->
                 <div class="action-bar">
                     <h1 class="page-title">Liste des Employés</h1>
-                    <button onclick="openModal('add')" class="btn-add">
-                        <span>+</span> Nouvel Employé
+                    <c:if test="${sessionScope.currentUser.role=='ADMINISTRATEUR' }">
+                        <button onclick="openModal('add')" class="btn-add">
+                            <span>+</span> Nouvel Employé
+                    </c:if>
                     </button>
                 </div>
 
@@ -467,7 +469,7 @@
                                 <label class="form-label">Projets</label>
                                 <select class="form-control" name="projects" id="projects" multiple size="3">
                                     <c:forEach var="proj" items="${projectList}">
-                                        <option value="${proj.id}">${proj.name}</option>
+                                        <option value="${proj.id}">${proj.project_name}</option>
                                     </c:forEach>
                                 </select>
                                 <small style="color: #999; font-size: 11px;">Ctrl+Click pour sélectionner

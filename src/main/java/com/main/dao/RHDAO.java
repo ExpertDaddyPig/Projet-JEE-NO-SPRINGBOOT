@@ -129,7 +129,7 @@ public class RHDAO {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
                     .prepareStatement("UPDATE Employees WHERE " + query + " SET " + changes);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -140,7 +140,7 @@ public class RHDAO {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
                     .prepareStatement("UPDATE Departements WHERE " + query + " SET " + changes);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -151,7 +151,7 @@ public class RHDAO {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
                     .prepareStatement("UPDATE Projects WHERE " + query + " SET " + changes);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -162,7 +162,7 @@ public class RHDAO {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
                     .prepareStatement("UPDATE Payslips WHERE " + query + " SET " + changes);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -175,7 +175,7 @@ public class RHDAO {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
                     .prepareStatement("UPDATE Employees SET " + changes + "WHERE id = " + id + " AND " + query);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -186,7 +186,7 @@ public class RHDAO {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
                     .prepareStatement("UPDATE Departements SET " + changes + "WHERE id = " + id + " AND " + query);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -197,7 +197,7 @@ public class RHDAO {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
                     .prepareStatement("UPDATE Projects SET " + changes + "WHERE id = " + id + " AND " + query);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -208,7 +208,7 @@ public class RHDAO {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
                     .prepareStatement("UPDATE Payslips SET " + changes + "WHERE id = " + id + " AND " + query);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -221,7 +221,7 @@ public class RHDAO {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
                     .prepareStatement("UPDATE Employees SET " + changes + "WHERE id = " + id);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -234,7 +234,7 @@ public class RHDAO {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
                     .prepareStatement("UPDATE Departements SET " + changes + "WHERE id = " + id);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -247,7 +247,7 @@ public class RHDAO {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
                     .prepareStatement("UPDATE Projects SET " + changes + "WHERE id = " + id);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -260,7 +260,7 @@ public class RHDAO {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
                     .prepareStatement("UPDATE Payslips SET " + changes + "WHERE id = " + id);
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
             e.printStackTrace();

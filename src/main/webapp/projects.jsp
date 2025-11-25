@@ -287,7 +287,7 @@
         <div class="navbar-brand">Gestion RH - Projets</div>
         <div class="navbar-links">
             <a href="${pageContext.request.contextPath}/dashboard">Tableau de bord</a>
-            <a href="${pageContext.request.contextPath}/employe.jsp">Employés</a>
+            <a href="${pageContext.request.contextPath}/users">Employés</a>
             <a href="${pageContext.request.contextPath}/payslips">Fiches de Paie</a>
             <a href="${pageContext.request.contextPath}/logout">Déconnexion</a>
         </div>
@@ -419,7 +419,7 @@
                                           onsubmit="return confirm('Voulez-vous vraiment supprimer ce projet ?');">
                                         <input type="hidden" name="id" value="${project.id}">
                                         <button type="submit" class="btn btn-danger" style="padding: 6px 12px; font-size: 13px;">
-                                            🗑️
+                                            🗑️ Supprimer
                                         </button>
                                     </form>
                                 <% } %>

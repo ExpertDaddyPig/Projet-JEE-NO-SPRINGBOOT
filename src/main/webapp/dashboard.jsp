@@ -192,8 +192,6 @@
 
                 <div class="menu-grid">
                     <!-- Menu accessible à tous -->
-                    <!-- Note : Pas besoin de passer l'utilisateur dans l'URL. 
-                 La page profile.jsp lira directement ${sessionScope.currentUser} -->
                     <a href="${pageContext.request.contextPath}/profile.jsp" class="menu-card">
                         <div class="menu-icon">👤</div>
                         <div class="menu-title">Mon Profil</div>
@@ -245,12 +243,6 @@
 
                     <!-- Menu uniquement pour Administrateur -->
                     <c:if test="${sessionScope.currentUser.role == 'ADMINISTRATEUR'}">
-                        <a href="${pageContext.request.contextPath}/users" class="menu-card">
-                            <div class="menu-icon">🔐</div>
-                            <div class="menu-title">Utilisateurs</div>
-                            <div class="menu-description">Gérer les comptes utilisateurs</div>
-                        </a>
-
                         <a href="${pageContext.request.contextPath}/reports" class="menu-card">
                             <div class="menu-icon">📈</div>
                             <div class="menu-title">Rapports</div>

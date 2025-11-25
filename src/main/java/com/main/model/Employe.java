@@ -51,7 +51,7 @@ public class Employe {
     private String email;
 
     @Column(name = "isActive", nullable = false)
-    private boolean active;
+    private boolean isActive;
 
     @Column(name = "createdAt")
     private LocalDate createdAt;
@@ -62,6 +62,8 @@ public class Employe {
     private Role role;
 
     public Employe() {
+        this.isActive = true;
+        this.createdAt = LocalDate.now();
     }
 
     // Creation of one employe with no additionnal information
@@ -227,11 +229,11 @@ public class Employe {
     }
 
     public boolean isActive() {
-        return active;
+        return isActive;
     }
 
     public void setActive(boolean active) {
-        this.active = active;
+        this.isActive = active;
     }
 
     public LocalDate getCreatedAt() {
@@ -298,7 +300,7 @@ public class Employe {
                 ", age=" + age +
                 ", employe_rank=" + employe_rank +
                 ", role=" + getRole() +
-                ", active=" + active +
+                ", active=" + isActive +
                 ", createdAt=" + createdAt +
                 ", lastLogin=" + lastLogin +
                 ", projects='" + projects + '\'' +

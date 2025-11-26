@@ -2,7 +2,10 @@ package com.main.servlet;
 
 import com.main.dao.RHDAO;
 import com.main.model.Role;
+import com.main.model.Departement;
 import com.main.model.Employe;
+import com.main.model.Project;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -71,14 +74,30 @@ public class UserManagementServlet extends HttpServlet {
     }
 
     private void listUsers(HttpServletRequest request, HttpServletResponse response)
-            throws SQLException, ServletException, IOException {
+            throws ServletException, IOException {
 
-        List<Employe> users = rhdao.getAllEmployees();
+        String search = request.getParameter("search");
+        List<Employe> users;
+
+        if (search != null && !search.trim().isEmpty()) {
+            int deptId = rhdao.getDepartement("departement_name = " + search).getId();
+            String clause = "last_name LIKE '%" + search + "%' OR " +
+                    "first_name LIKE '%" + search + "%' OR " +
+                    "registration_number LIKE '%" + search + "%' OR " +
+                    "departement_id = " + deptId;
+            users = rhdao.getEmployees(clause);
+        } else {
+            users = rhdao.getAllEmployees();
+        }
+
+        List<Departement> departments = rhdao.getAllDepartements();
+        List<Project> projects = rhdao.getAllProjects();
 
         request.setAttribute("users", users);
-        request.setAttribute("departments", rhdao.getAllDepartements());
-        request.setAttribute("projectList", rhdao.getAllProjects());
-        request.setAttribute("roles", Role.values());
+        request.setAttribute("departments", departments);
+        request.setAttribute("projectList", projects);
+        request.setAttribute("roles", Role.values()); // Enum Role
+
         request.getRequestDispatcher("/employees.jsp").forward(request, response);
     }
 
@@ -137,29 +156,27 @@ public class UserManagementServlet extends HttpServlet {
         Role role = Role.fromString(roleStr);
         Employe currentUser = (Employe) request.getSession().getAttribute("currentUser");
 
-
-        
         // Validation
         StringBuilder errors = new StringBuilder();
-        
+
         if (username == null || username.trim().isEmpty()) {
             errors.append("Le nom d'utilisateur est requis. ");
         } else if (rhdao.usernameExists(username.trim())) {
             errors.append("Ce nom d'utilisateur existe déjà. ");
         }
-        
+
         if (password == null || password.length() < 6) {
             errors.append("Le mot de passe doit contenir au moins 6 caractères. ");
         }
-        
+
         if (!password.equals(confirmPassword)) {
             errors.append("Les mots de passe ne correspondent pas. ");
         }
-        
+
         if (email == null || !email.matches("^[A-Za-z0-9+_.-]+@(.+)$")) {
             errors.append("Email invalide. ");
         }
-        
+
         if (roleStr == null || Role.fromString(roleStr) == null) {
             errors.append("Rôle invalide. ");
         }

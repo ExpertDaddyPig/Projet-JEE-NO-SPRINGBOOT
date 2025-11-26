@@ -37,6 +37,19 @@
                     color: white;
                 }
 
+                .navbar-links a {
+                    color: white;
+                    text-decoration: none;
+                    margin-left: 20px;
+                    padding: 8px 15px;
+                    border-radius: 5px;
+                    transition: background 0.3s;
+                }
+
+                .navbar-links a:hover {
+                    background-color: #555;
+                }
+
                 .navbar-user {
                     display: flex;
                     align-items: center;
@@ -302,6 +315,51 @@
                     padding-top: 15px;
                     border-top: 1px solid #eee;
                 }
+
+                .search-form {
+                    display: flex;
+                    align-items: center;
+                    background: white;
+                    padding: 5px;
+                    border-radius: 5px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+                    border: 1px solid #eee;
+                }
+
+                .search-input {
+                    border: none;
+                    padding: 8px 12px;
+                    font-size: 14px;
+                    outline: none;
+                    width: 300px;
+                    /* Largeur de la barre */
+                    color: #555;
+                }
+
+                .search-btn {
+                    background-color: #6c757d;
+                    color: white;
+                    border: none;
+                    padding: 8px 12px;
+                    border-radius: 4px;
+                    cursor: pointer;
+                    transition: background 0.2s;
+                }
+
+                .search-btn:hover {
+                    background-color: #5a6268;
+                }
+
+                .reset-link {
+                    color: #dc3545;
+                    text-decoration: none;
+                    margin-left: 10px;
+                    margin-right: 5px;
+                    font-weight: bold;
+                    font-size: 18px;
+                    display: flex;
+                    align-items: center;
+                }
             </style>
         </head>
 
@@ -309,8 +367,11 @@
 
             <!-- Navbar (Identique) -->
             <nav class="navbar">
-                <a href="${pageContext.request.contextPath}/dashboard" class="navbar-brand">Gestion RH</a>
-                <div class="navbar-user">
+                <div class="navbar-brand">Gestion RH - Employés</div>
+                <div class="navbar-links">
+                    <a href="${pageContext.request.contextPath}/dashboard">Tableau de bord</a>
+                    <a href="${pageContext.request.contextPath}/projects">Projets</a>
+                    <a href="${pageContext.request.contextPath}/payslips">Fiches de Paie</a>
                     <div class="user-info">
                         <span class="user-name">${sessionScope.currentUser.username}</span>
                         <span class="user-role">${sessionScope.currentUser.role.displayName}</span>
@@ -324,11 +385,26 @@
                 <!-- En-tête de la page -->
                 <div class="action-bar">
                     <h1 class="page-title">Liste des Employés</h1>
+
+                    <!-- BARRE DE RECHERCHE -->
+                    <form action="${pageContext.request.contextPath}/users" method="get" class="search-form">
+                        <input type="text" name="search" class="search-input"
+                            placeholder="Rechercher (Nom, Matricule, Département...)" value="${param.search}">
+
+                        <button type="submit" class="search-btn">🔍</button>
+
+                        <!-- Bouton pour annuler la recherche si un filtre est actif -->
+                        <c:if test="${not empty param.search}">
+                            <a href="${pageContext.request.contextPath}/users" class="reset-link"
+                                title="Effacer la recherche">×</a>
+                        </c:if>
+                    </form>
+
                     <c:if test="${sessionScope.currentUser.role=='ADMINISTRATEUR' }">
                         <button onclick="openModal('add')" class="btn-add">
                             <span>+</span> Nouvel Employé
+                        </button>
                     </c:if>
-                    </button>
                 </div>
 
                 <!-- Messages de succès/erreur -->

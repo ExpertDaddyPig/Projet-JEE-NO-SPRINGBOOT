@@ -1,7 +1,7 @@
 #import "@preview/fletcher:0.5.8" as fletcher: diagram, node, edge
 
 #set page(width: auto, height: auto, margin: 5mm, fill: white)
-#set text(font: "FreeSerif", size: 11pt)
+#set text(size: 11pt)
 #set table(
    stroke: 0pt,
    columns: (auto, auto),
@@ -15,7 +15,7 @@
   bottom: 0pt,
 )
 
-#let blob(pos, heading, content, tint: red, ..args) = node(
+#let blob(pos, heading, content, tint: blue, ..args) = node(
 	pos,
    table(
       columns: (auto),
@@ -26,12 +26,29 @@
       align(center, content),
    ),
 	width: auto,
-	fill: tint.lighten(60%),
+	fill: tint.lighten(70%),
 	stroke: 1pt + tint.darken(20%),
 	corner-radius: 5pt,
    shape: rect,
 	..args,
 )
+
+#let arrow(bend, type, content-start, content-end, ..args) = {
+   edge(
+      bend,
+      type,
+      content-start,
+      label-pos: 10pt,
+      ..args,
+   )
+   edge(
+      bend,
+      type,
+      content-end,
+      label-pos: 100% - 10pt,
+      ..args,
+   )
+}
 
 #diagram(
 	spacing: 40pt,
@@ -50,7 +67,7 @@
       )
    ],),
 
-	edge("d,r", "<|-"),
+	arrow("d,r", "<|-", [1:N], [1:1]),
 
 	blob((1,1),
    [
@@ -77,7 +94,7 @@
       )
    ],),
 
-	edge("r,u", "<|-"),
+	arrow("r,u", "<|-", [0:N], [1:1]),
 
 	blob((2,0),
    [
@@ -106,8 +123,8 @@
       )
    ],),
 
-   edge((1,2), (1,1), "-|>"),
-   edge("-|>"),
+   arrow("u", "-|>", [1:1], [0:N]),
+   arrow("d", "-|>", [1:1], [1:N]),
 
 	blob((1,3),
    [

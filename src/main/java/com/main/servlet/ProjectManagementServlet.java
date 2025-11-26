@@ -13,7 +13,7 @@ import java.util.List;
  * Servlet pour gérer les projets
  */
 @WebServlet("/projects/*")
-public class ProjectServlet extends HttpServlet {
+public class ProjectManagementServlet extends HttpServlet {
 
     private RHDAO dao;
 

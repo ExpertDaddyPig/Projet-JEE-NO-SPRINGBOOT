@@ -13,7 +13,7 @@ import java.util.List;
  * Servlet pour gérer les fiches de paie
  */
 @WebServlet("/payslips/*")
-public class PayslipServlet extends HttpServlet {
+public class PayslipManagementServlet extends HttpServlet {
 
     private RHDAO dao;
 

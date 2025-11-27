@@ -5,44 +5,11 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Assigner des Employés - ${project.project_name}</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 40px 20px;
-        }
-
-        .form-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-        }
-
-        .form-header {
-            margin-bottom: 30px;
-        }
-
-        .form-header h1 {
-            color: #333;
-            font-size: 28px;
-            margin-bottom: 10px;
-        }
-
-        .form-header p {
-            color: #666;
-        }
-
+        /* Styles spécifiques pour l'assignation d'employés */
         .project-info {
             background: #e7f3ff;
             padding: 15px;
@@ -54,6 +21,11 @@
         .project-info h3 {
             color: #004085;
             margin-bottom: 8px;
+        }
+
+        .project-info p {
+            margin: 0;
+            color: #004085;
         }
 
         .employees-grid {
@@ -79,10 +51,6 @@
 
         .employee-checkbox input[type="checkbox"] {
             display: none;
-        }
-
-        .employee-checkbox input[type="checkbox"]:checked + label {
-            border-color: #667eea;
         }
 
         .employee-checkbox.selected {
@@ -132,44 +100,6 @@
             left: 50%;
             transform: translate(-50%, -50%);
             font-weight: bold;
-        }
-
-        .btn {
-            padding: 12px 24px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 16px;
-            transition: all 0.3s;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            width: 100%;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background: #6c757d;
-            color: white;
-            text-decoration: none;
-            display: inline-block;
-            text-align: center;
-        }
-
-        .form-actions {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-        }
-
-        .form-actions > * {
-            flex: 1;
         }
 
         .selection-summary {
@@ -228,7 +158,6 @@
         }
 
         window.onload = function() {
-            // Initialiser les cases déjà cochées
             document.querySelectorAll('input[name="employee_ids"]:checked').forEach(cb => {
                 cb.closest('.employee-checkbox').classList.add('selected');
             });
@@ -236,8 +165,8 @@
         };
     </script>
 </head>
-<body>
-    <div class="form-container">
+<body class="form-page">
+    <div class="form-container" style="max-width: 800px;">
         <div class="form-header">
             <h1>👥 Assigner des Employés</h1>
             <p>Sélectionnez les employés à assigner au projet</p>

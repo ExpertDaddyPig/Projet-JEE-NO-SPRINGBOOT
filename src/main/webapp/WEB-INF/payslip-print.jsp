@@ -4,29 +4,11 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fiche de Paie - ${employee.first_name} ${employee.last_name}</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
     <style>
-        @media print {
-            .no-print {
-                display: none !important;
-            }
-            body {
-                margin: 0;
-            }
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            padding: 20px;
-            background: #f5f5f5;
-        }
-
+        /* Styles spécifiques pour l'impression de fiches de paie */
         .payslip-container {
             max-width: 800px;
             margin: 0 auto;
@@ -148,10 +130,6 @@
 
         .print-button:hover {
             background: #5568d3;
-        }
-
-        .month-names {
-            display: none;
         }
     </style>
     <script>

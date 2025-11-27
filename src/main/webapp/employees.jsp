@@ -56,20 +56,21 @@
     </style>
 </head>
 
-<body>
-    <nav class="navbar">
-        <div class="navbar-brand">Gestion RH - Employés</div>
-        <div class="navbar-links">
-            <a href="${pageContext.request.contextPath}/dashboard">Tableau de bord</a>
-            <a href="${pageContext.request.contextPath}/projects">Projets</a>
-            <a href="${pageContext.request.contextPath}/payslips">Fiches de Paie</a>
-            <div class="user-info">
-                <span class="user-name">${sessionScope.currentUser.username}</span>
-                <span class="user-role">${sessionScope.currentUser.role.displayName}</span>
-            </div>
-            <a href="${pageContext.request.contextPath}/logout" class="btn-logout">Déconnexion</a>
-        </div>
-    </nav>
+        <body>
+
+            <nav class="navbar">
+                <div class="navbar-brand">Gestion RH - Employés</div>
+                <div class="navbar-links">
+                    <a href="${pageContext.request.contextPath}/dashboard">Tableau de bord</a>
+                    <a href="${pageContext.request.contextPath}/projects">Projets</a>
+                    <a href="${pageContext.request.contextPath}/payslips">Fiches de Paie</a>
+                    <div class="user-info">
+                        <span class="user-name">${sessionScope.currentUser.username}</span>
+                        <span class="user-role">${sessionScope.currentUser.role.displayName}</span>
+                    </div>
+                    <a href="${pageContext.request.contextPath}/logout" class="btn-logout">Déconnexion</a>
+                </div>
+            </nav>
 
     <div class="container">
         <div class="action-bar">
@@ -85,7 +86,7 @@
             </form>
 
             <c:if test="${sessionScope.currentUser.role=='ADMINISTRATEUR' }">
-                <button onclick="openModal('add')" class="btn-add">
+                <button onclick="openModal('add')" class="btn btn-add">
                     <span>+</span> Nouvel Employé
                 </button>
             </c:if>

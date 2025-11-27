@@ -32,6 +32,7 @@ public class RHDAO {
     // #region GET ALL DATA
     public List<Employe> getAllEmployees() {
         try (EntityManager em = emf.createEntityManager()) {
+            @SuppressWarnings("unchecked")
             TypedQuery<Employe> query = (TypedQuery<Employe>) em.createNativeQuery("SELECT * FROM Employees", Employe.class);
             return query.getResultList();
         }
@@ -39,13 +40,19 @@ public class RHDAO {
 
     public List<Departement> getAllDepartements() {
         try (EntityManager em = emf.createEntityManager()) {
+            @SuppressWarnings("unchecked")
             TypedQuery<Departement> query = (TypedQuery<Departement>) em.createNativeQuery("SELECT * FROM Departements", Departement.class);
-            return query.getResultList();
+            List<Departement> departements = query.getResultList();
+            for (Departement departement: departements) {
+                departement.setEmployeesCount();
+            }
+            return departements;
         }
     }
 
     public List<Project> getAllProjects() {
         try (EntityManager em = emf.createEntityManager()) {
+            @SuppressWarnings("unchecked")
             TypedQuery<Project> query = (TypedQuery<Project>) em.createNativeQuery("SELECT * FROM Projects", Project.class);
             return query.getResultList();
         }
@@ -53,6 +60,7 @@ public class RHDAO {
 
     public List<Payslip> getAllPayslips() {
         try (EntityManager em = emf.createEntityManager()) {
+            @SuppressWarnings("unchecked")
             TypedQuery<Payslip> query = (TypedQuery<Payslip>) em.createNativeQuery("SELECT * FROM Payslips", Payslip.class);
             return query.getResultList();
         }
@@ -62,6 +70,7 @@ public class RHDAO {
     // #region GET DATA WHERE "query"
     public Employe getEmploye(String queryString) {
         try (EntityManager em = emf.createEntityManager()) {
+            @SuppressWarnings("unchecked")
             TypedQuery<Employe> query = (TypedQuery<Employe>) em.createNativeQuery("SELECT * FROM Employees WHERE " + queryString, Employe.class);
             return query.getSingleResultOrNull();
         }
@@ -69,6 +78,7 @@ public class RHDAO {
 
     public Departement getDepartement(String queryString) {
         try (EntityManager em = emf.createEntityManager()) {
+            @SuppressWarnings("unchecked")
             TypedQuery<Departement> query = (TypedQuery<Departement>) em.createNativeQuery("SELECT * FROM Departements WHERE " + queryString,
                     Departement.class);
             return query.getSingleResultOrNull();
@@ -77,6 +87,7 @@ public class RHDAO {
 
     public Project getProject(String queryString) {
         try (EntityManager em = emf.createEntityManager()) {
+            @SuppressWarnings("unchecked")
             TypedQuery<Project> query = (TypedQuery<Project>) em.createNativeQuery("SELECT * FROM Projects WHERE " + queryString, Project.class);
             return query.getSingleResultOrNull();
         }
@@ -84,6 +95,7 @@ public class RHDAO {
 
     public Payslip getPayslip(String queryString) {
         try (EntityManager em = emf.createEntityManager()) {
+            @SuppressWarnings("unchecked")
             TypedQuery<Payslip> query = (TypedQuery<Payslip>) em.createNativeQuery("SELECT * FROM Payslips WHERE " + queryString, Payslip.class);
             return query.getSingleResultOrNull();
         }
@@ -93,6 +105,7 @@ public class RHDAO {
     // #region GET ALL DATA WHERE "query"
     public List<Employe> getEmployees(String queryString) {
         try (EntityManager em = emf.createEntityManager()) {
+            @SuppressWarnings("unchecked")
             TypedQuery<Employe> query = (TypedQuery<Employe>) em.createNativeQuery("SELECT * FROM Employees WHERE " + queryString, Employe.class);
             return query.getResultList();
         }
@@ -100,6 +113,7 @@ public class RHDAO {
 
     public List<Departement> getDepartements(String queryString) {
         try (EntityManager em = emf.createEntityManager()) {
+            @SuppressWarnings("unchecked")
             TypedQuery<Departement> query = (TypedQuery<Departement>) em.createNativeQuery("SELECT * FROM Departements WHERE " + queryString,
                     Departement.class);
             return query.getResultList();
@@ -108,6 +122,7 @@ public class RHDAO {
 
     public List<Project> getProjects(String queryString) {
         try (EntityManager em = emf.createEntityManager()) {
+            @SuppressWarnings("unchecked")
             TypedQuery<Project> query = (TypedQuery<Project>) em.createNativeQuery("SELECT * FROM Projects WHERE " + queryString, Project.class);
             return query.getResultList();
         }
@@ -115,6 +130,7 @@ public class RHDAO {
 
     public List<Payslip> getPayslips(String queryString) {
         try (EntityManager em = emf.createEntityManager()) {
+            @SuppressWarnings("unchecked")
             TypedQuery<Payslip> query = (TypedQuery<Payslip>) em.createNativeQuery("SELECT * FROM Payslips WHERE " + queryString, Payslip.class);
             return query.getResultList();
         }
@@ -174,7 +190,7 @@ public class RHDAO {
         try {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
-                    .prepareStatement("UPDATE Employees SET " + changes + "WHERE id = " + id + " AND " + query);
+                    .prepareStatement("UPDATE Employees SET " + changes + " WHERE id = " + id + " AND " + query);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -185,7 +201,7 @@ public class RHDAO {
         try {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
-                    .prepareStatement("UPDATE Departements SET " + changes + "WHERE id = " + id + " AND " + query);
+                    .prepareStatement("UPDATE Departements SET " + changes + " WHERE id = " + id + " AND " + query);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -196,7 +212,7 @@ public class RHDAO {
         try {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
-                    .prepareStatement("UPDATE Projects SET " + changes + "WHERE id = " + id + " AND " + query);
+                    .prepareStatement("UPDATE Projects SET " + changes + " WHERE id = " + id + " AND " + query);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -207,7 +223,7 @@ public class RHDAO {
         try {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
-                    .prepareStatement("UPDATE Payslips SET " + changes + "WHERE id = " + id + " AND " + query);
+                    .prepareStatement("UPDATE Payslips SET " + changes + " WHERE id = " + id + " AND " + query);
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -220,7 +236,7 @@ public class RHDAO {
         try {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
-                    .prepareStatement("UPDATE Employees SET " + changes + "WHERE id = " + id);
+                    .prepareStatement("UPDATE Employees SET " + changes + " WHERE id = " + id);
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -233,7 +249,7 @@ public class RHDAO {
         try {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
-                    .prepareStatement("UPDATE Departements SET " + changes + "WHERE id = " + id);
+                    .prepareStatement("UPDATE Departements SET " + changes + " WHERE id = " + id);
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -246,7 +262,7 @@ public class RHDAO {
         try {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
-                    .prepareStatement("UPDATE Projects SET " + changes + "WHERE id = " + id);
+                    .prepareStatement("UPDATE Projects SET " + changes + " WHERE id = " + id);
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {
@@ -259,7 +275,7 @@ public class RHDAO {
         try {
             Connection con = DriverManager.getConnection(URL, UTILISATEUR, MOT_DE_PASSE);
             PreparedStatement preparedStatement = con
-                    .prepareStatement("UPDATE Payslips SET " + changes + "WHERE id = " + id);
+                    .prepareStatement("UPDATE Payslips SET " + changes + " WHERE id = " + id);
             preparedStatement.executeUpdate();
             return true;
         } catch (SQLException e) {

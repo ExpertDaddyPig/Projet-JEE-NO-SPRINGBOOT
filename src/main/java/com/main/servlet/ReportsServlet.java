@@ -4,6 +4,8 @@ import com.main.dao.RHDAO;
 import com.main.model.Employe;
 import com.main.model.Departement;
 import com.main.model.Project;
+import com.main.model.Role;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -77,21 +79,17 @@ public class ReportsServlet extends HttpServlet {
                 .count();
         stats.put("finishedProjects", finishedProjects);
 
-        // FIX: Employés par grade avec LinkedHashMap pour préserver l'ordre
-        Map<Integer, Long> employeesByRank = new LinkedHashMap<>();
-        employeesByRank.put(4, allEmployees.stream().filter(e -> e.getEmploye_rank() == 4).count());
-        employeesByRank.put(3, allEmployees.stream().filter(e -> e.getEmploye_rank() == 3).count());
-        employeesByRank.put(2, allEmployees.stream().filter(e -> e.getEmploye_rank() == 2).count());
-        employeesByRank.put(1, allEmployees.stream().filter(e -> e.getEmploye_rank() == 1).count());
+        Map<String, Long> employeesByRank = calculateEmployeesByRankFixed(allEmployees);
+
         stats.put("employeesByRank", employeesByRank);
 
-        // FIX: Employés par département - compter avec departement_id
         Map<String, Long> employeesByDept = calculateEmployeesByDepartmentFixed(allEmployees, allDepartments);
         stats.put("employeesByDepartment", employeesByDept);
 
-        // Employés par projet
         Map<String, Integer> employeesByProject = calculateEmployeesByProject(allProjects);
         stats.put("employeesByProject", employeesByProject);
+
+        System.out.println(stats.get("employeesByRank"));
 
         request.setAttribute("stats", stats);
         request.setAttribute("allDepartments", allDepartments);
@@ -111,7 +109,6 @@ public class ReportsServlet extends HttpServlet {
             Map<String, Object> report = new HashMap<>();
             report.put("department", dept);
 
-            // FIX: Utiliser departement_id pour filtrer les employés
             List<Employe> deptEmployees = allEmployees.stream()
                     .filter(e -> e.getDepartement_id() != null && e.getDepartement_id().equals(dept.getId()))
                     .collect(Collectors.toList());
@@ -212,9 +209,27 @@ public class ReportsServlet extends HttpServlet {
     }
 
     /**
-     * FIX: Calcule le nombre d'employés par département en utilisant departement_id
+     * Calcule le nombre d'employés par grade
      */
-    private Map<String, Long> calculateEmployeesByDepartmentFixed(List<Employe> employees, List<Departement> departments) {
+    private Map<String, Long> calculateEmployeesByRankFixed(List<Employe> employees) {
+        Map<String, Long> result = new LinkedHashMap<>();
+
+        for (Role role : Role.values()) {
+            long count = employees.stream()
+                    .filter(e -> e.getEmploye_rank() == role.getLevel())
+                    .count();
+
+            result.put(role.getDisplayName(), count);
+        }
+
+        return result;
+    }
+
+    /**
+     * Calcule le nombre d'employés par département en utilisant departement_id
+     */
+    private Map<String, Long> calculateEmployeesByDepartmentFixed(List<Employe> employees,
+            List<Departement> departments) {
         Map<String, Long> result = new LinkedHashMap<>();
 
         for (Departement dept : departments) {

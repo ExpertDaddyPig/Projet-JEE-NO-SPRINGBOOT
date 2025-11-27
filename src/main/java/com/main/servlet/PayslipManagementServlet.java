@@ -234,7 +234,6 @@ public class PayslipManagementServlet extends HttpServlet {
 
         String employeIdStr = request.getParameter("employe_id");
         String monthStr = request.getParameter("month");
-        String yearStr = request.getParameter("year");
 
         StringBuilder query = new StringBuilder();
 

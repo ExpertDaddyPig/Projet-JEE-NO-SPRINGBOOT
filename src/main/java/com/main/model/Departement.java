@@ -16,6 +16,9 @@ public class Departement {
     @Column(name = "employees", length = 1000, nullable = true)
     private String employees;
 
+    @Column(name = "employeesCount", nullable = true)
+    private int employeesCount;
+
     public Departement() {
     }
 
@@ -23,10 +26,19 @@ public class Departement {
         this.id = id;
         this.departement_name = name;
         this.employees = employees;
+        setEmployeesCount();
     }
 
     public String getDepartement_name() {
         return departement_name;
+    }
+
+    public int getEmployeesCount() {
+        return employeesCount;
+    }
+
+    public void setEmployeesCount() {
+        employeesCount = employees.split(",").length;
     }
 
     public String getEmployees() {

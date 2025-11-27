@@ -2,11 +2,14 @@ package com.main.servlet;
 
 import com.main.dao.RHDAO;
 import com.main.model.Departement;
+import com.main.model.Employe;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.List;
 
 @WebServlet("/departments/*")
 public class DepartmentManagementServlet extends HttpServlet {
@@ -58,9 +61,21 @@ public class DepartmentManagementServlet extends HttpServlet {
 
     private void listDepartments(HttpServletRequest request, HttpServletResponse response)
             throws SQLException, ServletException, IOException {
-        // On a besoin des départements ET de tous les employés pour afficher les noms
-        request.setAttribute("departments", rhdao.getAllDepartements());
-        request.setAttribute("allEmployees", rhdao.getAllEmployees());
+        List<Employe> allEmployees = rhdao.getAllEmployees();
+        List<Departement> departements = rhdao.getAllDepartements();
+
+        for (Departement departement : departements) {
+            for (Employe employe : allEmployees) {
+                String newList;
+                if (departement.getEmployees() == "") newList = "" + employe.getId();
+                else newList = departement.getEmployees() + "," + employe.getId();
+                if (departement.getId() == employe.getDepartement_id() && !departement.getEmployees().contains("" + employe.getId())) rhdao.updateDepartementById(employe.getDepartement_id(),
+                        " employees = \"" + newList + "\"");
+            }
+        }
+
+        request.setAttribute("departments", departements);
+        request.setAttribute("allEmployees", allEmployees);
 
         request.getRequestDispatcher("departments.jsp").forward(request, response);
     }
@@ -69,10 +84,8 @@ public class DepartmentManagementServlet extends HttpServlet {
             throws SQLException, IOException {
 
         String name = request.getParameter("name");
-        // Récupère les IDs sélectionnés (tableau de strings)
         String[] employeeIds = request.getParameterValues("employeeIds");
 
-        // Transformation du tableau ["1", "5"] en String "1,5"
         String employeesString = "";
         if (employeeIds != null && employeeIds.length > 0) {
             employeesString = String.join(",", employeeIds);
@@ -82,7 +95,6 @@ public class DepartmentManagementServlet extends HttpServlet {
         dept.setDepartement_name(name);
         dept.setEmployees(employeesString);
 
-        // Appel DAO (assurez-vous d'avoir une méthode insertDepartment(Departement d))
         rhdao.save(dept);
 
         response.sendRedirect(request.getContextPath() + "/departments?success=add");
@@ -92,7 +104,6 @@ public class DepartmentManagementServlet extends HttpServlet {
             throws SQLException, IOException {
 
         String idParam = request.getParameter("id");
-        String name = request.getParameter("name");
         String[] employeeIds = request.getParameterValues("employeeIds");
 
         if (idParam != null) {
@@ -103,7 +114,7 @@ public class DepartmentManagementServlet extends HttpServlet {
                 employeesString = String.join(",", employeeIds);
             }
 
-            rhdao.updateDepartementById(id, "name = " + name + ", employees = " + employeesString);
+            rhdao.updateDepartementById(id, " employees = " + employeesString);
 
             response.sendRedirect(request.getContextPath() + "/departments?success=update");
         } else {

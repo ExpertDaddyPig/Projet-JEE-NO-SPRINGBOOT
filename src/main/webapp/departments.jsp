@@ -35,7 +35,7 @@
     <div class="container">
         <div class="action-bar">
             <h1 class="page-title">Liste des Départements</h1>
-            <button onclick="openModal('add')" class="btn-add">+ Nouveau Département</button>
+            <button onclick="openModal('add')" class="btn btn-add">+ Nouveau Département</button>
         </div>
 
         <c:if test="${param.success eq 'add'}">
@@ -48,45 +48,49 @@
             <div class="alert alert-error">Supprimé avec succès.</div>
         </c:if>
 
-        <div class="table-card">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nom</th>
-                        <th>Membres assignés</th>
-                        <th style="text-align: right;">Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="dept" items="${departments}">
-                        <tr>
-                            <td><strong>${dept.departement_name}</strong></td>
-                            <td>
-                                <c:if test="${not empty dept.employees}">
-                                    <c:set var="count" value="0" />
-                                    <c:set var="ids" value="${fn:split(dept.employees, ',')}" />
-                                    <div style="font-size: 13px; color: #555;">
-                                        <c:forEach var="id" items="${ids}" varStatus="status">
-                                            <c:forEach var="emp" items="${allEmployees}">
-                                                <c:if test="${String.valueOf(emp.id) == id}">
-                                                    ${emp.first_name} ${emp.last_name}
-                                                    <c:if test="${!status.last}">, </c:if>
-                                                    <c:set var="count" value="${count + 1}" />
-                                                </c:if>
-                                            </c:forEach>
-                                        </c:forEach>
-                                    </div>
-                                    <span class="badge-count">${count} membre(s)</span>
-                                </c:if>
-                                <c:if test="${empty dept.employees}">
-                                    <span style="color:#999; font-style:italic;">Aucun membre</span>
-                                </c:if>
-                            </td>
-                            <td class="actions-cell">
-                                <button class="btn-icon btn-edit" onclick="openModal('edit', {
-                                    id: '${dept.id}',
-                                    name: '${dept.departement_name}',
-                                    employees: '${dept.employees}'
+                    <div class="table-card">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nom</th>
+                                    <th>Membres assignés</th>
+                                    <th style="text-align: right;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach var="dept" items="${departments}">
+                                    <tr>
+                                        <td><strong>${dept.departement_name}</strong></td>
+                                        <td>
+                                            <!-- Logique pour afficher les noms à partir des IDs stockés en String -->
+                                            <c:if test="${not empty dept.employees}">
+                                                <c:set var="count" value="0" />
+                                                <c:set var="ids" value="${fn:split(dept.employees, ',')}" />
+
+                                                <div style="font-size: 13px; color: #555;">
+                                                    <c:forEach var="id" items="${ids}" varStatus="status">
+                                                        <!-- On cherche l'employé correspondant dans la liste complète -->
+                                                        <c:forEach var="emp" items="${allEmployees}">
+                                                            <!-- Attention : comparaison String vs Int ou String vs String -->
+                                                            <c:if test="${String.valueOf(emp.id) == id}">
+                                                                ${emp.first_name} ${emp.last_name}
+                                                                <c:if test="${!status.last}">, </c:if>
+                                                                <c:set var="count" value="${count + 1}" />
+                                                            </c:if>
+                                                        </c:forEach>
+                                                    </c:forEach>
+                                                </div>
+                                                <span class="badge-count">${dept.employeesCount} membre(s)</span>
+                                            </c:if>
+                                            <c:if test="${empty dept.employees}">
+                                                <span style="color:#999; font-style:italic;">Aucun membre</span>
+                                            </c:if>
+                                        </td>
+                                        <td style="text-align: right;">
+                                            <button class="btn-icon btn-edit" onclick="openModal('edit', {
+                                id: '${dept.id}',
+                                name: '${dept.departement_name}',
+                                employees: '${dept.employees}' 
                                 })">✎</button>
                                 <button class="btn-icon btn-delete" onclick="openDeleteModal('${dept.id}')">🗑</button>
                             </td>

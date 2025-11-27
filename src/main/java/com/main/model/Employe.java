@@ -27,7 +27,7 @@ public class Employe {
     private String registration_number;
 
     @Column(name = "departement_id", nullable = true)
-    private int departement_id;
+    private Integer departement_id;
 
     @Column(name = "projects", length = 200, nullable = true)
     private String projects;
@@ -36,7 +36,7 @@ public class Employe {
     private String job_name;
 
     @Column(name = "employe_rank", nullable = false)
-    private int employe_rank;
+    private Integer employe_rank;
 
     @Column(name = "age", nullable = false)
     private int age;
@@ -66,7 +66,6 @@ public class Employe {
         this.createdAt = LocalDate.now();
     }
 
-    // Creation of one employe with no additionnal information
     public Employe(String first_name, String last_name, String email, String gender, int employe_rank, int age) {
         this.first_name = first_name;
         this.last_name = last_name;
@@ -78,14 +77,14 @@ public class Employe {
     }
 
     public Employe(String first_name, String last_name, String email, String gender, String job_name, int departement_id,
-            int employe_rank, int age) {
+                   int employe_rank, int age) {
         this(first_name, last_name, email, gender, employe_rank, age);
         this.job_name = job_name;
         this.departement_id = departement_id;
     }
 
     public Employe(String first_name, String last_name, String email, String gender, String job_name, int projects_id[],
-            int departement_id, int employe_rank, int age) {
+                   int departement_id, int employe_rank, int age) {
         this(first_name, last_name, email, gender, employe_rank, age);
         this.job_name = job_name;
         this.departement_id = departement_id;
@@ -140,11 +139,11 @@ public class Employe {
         this.age = age;
     }
 
-    public int getEmploye_rank() {
+    public Integer getEmploye_rank() {
         return employe_rank;
     }
 
-    public void setEmploye_rank(int employe_rank) {
+    public void setEmploye_rank(Integer employe_rank) {
         this.employe_rank = employe_rank;
     }
 
@@ -270,7 +269,7 @@ public class Employe {
         this.departement_id = departement_id;
     }
 
-    public int getDepartement_id() {
+    public Integer getDepartement_id() {
         return departement_id;
     }
 

@@ -30,10 +30,6 @@ public class DashboardServlet extends HttpServlet {
         // Logger l'accès
         System.out.println("Dashboard accessed by: " + currentEmploye.getUsername() + " (" + currentEmploye.getRole() + ")");
 
-        // L'utilisateur est déjà dans la session, pas besoin de le remettre
-        // Il sera accessible via ${currentEmploye} dans la JSP
-
-        // Forward vers la page JSP du dashboard
         request.getRequestDispatcher("/dashboard.jsp").forward(request, response);
     }
 

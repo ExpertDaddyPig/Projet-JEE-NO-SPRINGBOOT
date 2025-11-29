@@ -41,7 +41,7 @@
 
         <div class="menu-grid">
             <!-- Menu accessible à tous -->
-            <a href="${pageContext.request.contextPath}/profile.jsp" class="menu-card">
+            <a href="${pageContext.request.contextPath}/profile" class="menu-card">
                 <div class="menu-icon">👤</div>
                 <div class="menu-title">Mon Profil</div>
                 <div class="menu-description">Consulter et modifier vos informations</div>

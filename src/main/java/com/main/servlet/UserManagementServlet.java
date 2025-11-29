@@ -151,7 +151,7 @@ public class UserManagementServlet extends HttpServlet {
         String[] projectArray = request.getParameterValues("projects");
         String projects = "";
         if (projectArray != null && projectArray.length > 0) {
-            projects = String.join(", ", projectArray); // Crée une string "Proj1, Proj2"
+            projects = String.join(", ", projectArray); 
         }
         Role role = Role.fromString(roleStr);
         Employe currentUser = (Employe) request.getSession().getAttribute("currentUser");
@@ -198,7 +198,6 @@ public class UserManagementServlet extends HttpServlet {
             return;
         }
 
-        // Création de l'utilisateur
         Employe newUser = new Employe(first_name, last_name, email, gender, jobName, departementId,
                 Role.fromString(roleStr).getLevel(), age);
 
@@ -230,7 +229,6 @@ public class UserManagementServlet extends HttpServlet {
         String roleStr = request.getParameter("role");
         String activeStr = request.getParameter("active");
 
-        // Validation
         if (idParam == null || username == null || email == null || roleStr == null) {
             response.sendRedirect(request.getContextPath() + "/users");
             return;

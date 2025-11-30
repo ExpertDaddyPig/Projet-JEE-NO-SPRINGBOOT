@@ -8,6 +8,52 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Employés</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
+    <style>
+        /* Styles spécifiques à cette page uniquement */
+        .search-form {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 5px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eee;
+        }
+
+        .search-input {
+            border: none;
+            padding: 8px 12px;
+            font-size: 14px;
+            outline: none;
+            width: 300px;
+            color: #555;
+        }
+
+        .search-btn {
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-btn:hover {
+            background-color: #5a6268;
+        }
+
+        .reset-link {
+            color: #dc3545;
+            text-decoration: none;
+            margin-left: 10px;
+            margin-right: 5px;
+            font-weight: bold;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+        }
+    </style>
 </head>
 
         <body>
@@ -202,8 +248,8 @@
                 </div>
 
                 <div class="modal-footer">
-                    <button type="button" class="btn-secondary" onclick="closeModal('employeeModal')">Annuler</button>
-                    <button type="submit" class="btn-add" id="submitBtn">Enregistrer</button>
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('employeeModal')">Annuler</button>
+                    <button type="submit" class="btn btn-add" id="submitBtn">Enregistrer</button>
                 </div>
             </form>
         </div>
@@ -219,8 +265,8 @@
 
             <form action="${pageContext.request.contextPath}/users/delete" method="post" style="display: flex; justify-content: center; gap: 15px;">
                 <input type="hidden" name="id" id="deleteId">
-                <button type="button" class="btn-secondary" onclick="closeModal('deleteModal')">Annuler</button>
-                <button type="submit" class="btn-logout">Confirmer suppression</button>
+                <button type="button" class="btn btn-secondary" onclick="closeModal('deleteModal')">Annuler</button>
+                <button type="submit" class="btn btn-logout">Confirmer suppression</button>
             </form>
         </div>
     </div>

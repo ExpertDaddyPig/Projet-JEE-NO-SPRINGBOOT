@@ -14,7 +14,8 @@ CREATE TABLE
     IF NOT EXISTS Departements (
         id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
         departement_name VARCHAR(50),
-        employees VARCHAR(1000)
+        employees VARCHAR(1000),
+        employeesCount INT
     );
 
 CREATE TABLE
@@ -82,7 +83,7 @@ VALUES
         40,
         'admin@admin.com',
         'sys_admin',
-        '$2a$12$b7Acw.axAnGB4Vhng1yPUOLtvC1GKx0nuz/IBALwrThaS6DH6YpaS',
+        '$2a$12$b7Acw.axAnGB4Vhng1yPUOLtvC1GKx0nuz/IBALwrThaS6DH6YpaS', -- 12345678
         CURRENT_TIMESTAMP(),
         CURRENT_TIMESTAMP(),
         TRUE

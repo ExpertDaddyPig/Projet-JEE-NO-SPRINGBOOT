@@ -260,7 +260,6 @@ public class ReportsServlet extends HttpServlet {
                 count = project.getEmployees().split(",").length;
             }
 
-            // N'ajouter que si count > 0
             if (count > 0) {
                 result.put(project.getProject_name(), count);
             }

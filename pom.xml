@@ -87,47 +87,50 @@
         <defaultGoal>cargo:run</defaultGoal>
 
         <finalName>Projet JEE</finalName>
+        
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <version>3.4.0</version>
-                <configuration>
-                    <failOnMissingWebXml>false</failOnMissingWebXml>
-                </configuration>
-            </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-war-plugin</artifactId>
+            <version>3.4.0</version>
+            <configuration>
+                <failOnMissingWebXml>false</failOnMissingWebXml>
+            </configuration>
+        </plugin>
 
-            <plugin>
-                <groupId>org.codehaus.cargo</groupId>
-                <artifactId>cargo-maven3-plugin</artifactId>
-                <version>1.10.13</version>
+        <plugin>
+            <groupId>org.codehaus.cargo</groupId>
+            <artifactId>cargo-maven3-plugin</artifactId>
+            <version>1.10.13</version>
+            <configuration>
+                <container>
+                    <containerId>tomcat10x</containerId>
+                    <type>installed</type>
+                    <artifactInstaller>
+                        <groupId>org.apache.tomcat</groupId>
+                        <artifactId>tomcat</artifactId>
+                        <version>10.1.24</version>
+                    </artifactInstaller>
+                </container>
+
                 <configuration>
-                    <container>
-                        <containerId>tomcat10x</containerId>
-                        <type>installed</type>
-                        <artifactInstaller>
-                            <groupId>org.apache.tomcat</groupId>
-                            <artifactId>tomcat</artifactId>
-                            <version>10.1.24</version>
-                        </artifactInstaller>
-                    </container>
-                    <configuration>
-                        <properties>
-                            <cargo.servlet.port>8080</cargo.servlet.port>
-                        </properties>
-                        <deployables>
-                            <deployable>
-                                <groupId>${project.groupId}</groupId>
-                                <artifactId>${project.artifactId}</artifactId>
-                                <type>war</type>
-                                <properties>
-                                    <context>/</context>
-                                </properties>
-                            </deployable>
-                        </deployables>
-                    </configuration>
+                    <properties>
+                        <cargo.servlet.port>8080</cargo.servlet.port>
+                    </properties>
                 </configuration>
-            </plugin>
-        </plugins>
+
+                <deployables>
+                    <deployable>
+                        <groupId>${project.groupId}</groupId>
+                        <artifactId>${project.artifactId}</artifactId>
+                        <type>war</type>
+                        <properties>
+                            <context>/</context>
+                        </properties>
+                    </deployable>
+                </deployables>
+            </configuration>
+        </plugin>
+    </plugins>
     </build>
 </project>

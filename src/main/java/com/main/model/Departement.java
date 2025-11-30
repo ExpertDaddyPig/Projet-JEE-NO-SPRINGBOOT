@@ -17,7 +17,7 @@ public class Departement {
     private String employees;
 
     @Column(name = "employeesCount", nullable = true)
-    private int employeesCount;
+    private Integer employeesCount;
 
     public Departement() {
     }
@@ -33,7 +33,7 @@ public class Departement {
         return departement_name;
     }
 
-    public int getEmployeesCount() {
+    public Integer getEmployeesCount() {
         return employeesCount;
     }
 

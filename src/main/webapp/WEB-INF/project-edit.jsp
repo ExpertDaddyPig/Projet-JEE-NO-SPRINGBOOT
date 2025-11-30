@@ -8,54 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Modifier le projet - ${project.project_name}</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
-    <style>
-        /* Styles spécifiques pour l'édition de projets */
-        body {
-            background-color: #f5f5f5;
-            padding: 20px;
-        }
-
-        .form-section {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .form-header {
-            margin-bottom: 25px;
-            border-bottom: 2px solid #dee2e6;
-            padding-bottom: 15px;
-        }
-
-        .form-header h1 {
-            color: #333;
-            font-size: 28px;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            color: #666;
-            font-weight: 600;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            font-size: 16px;
-            font-family: inherit;
-            transition: border-color 0.2s;
-        }
-
-        .form-control:focus {
-            border-color: #667eea;
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
-        }
-    </style>
 </head>
 
 <body>

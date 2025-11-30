@@ -40,14 +40,12 @@
         </div>
 
         <div class="menu-grid">
-            <!-- Menu accessible à tous -->
             <a href="${pageContext.request.contextPath}/profile" class="menu-card">
                 <div class="menu-icon">👤</div>
                 <div class="menu-title">Mon Profil</div>
                 <div class="menu-description">Consulter et modifier vos informations</div>
             </a>
 
-            <!-- Menu pour Admin et Chefs de département -->
             <c:if test="${sessionScope.currentUser.role == 'ADMINISTRATEUR' || sessionScope.currentUser.role == 'CHEF_DEPARTEMENT'}">
                 <a href="${pageContext.request.contextPath}/users" class="menu-card">
                     <div class="menu-icon">👥</div>
@@ -62,7 +60,6 @@
                 </a>
             </c:if>
 
-            <!-- Menu pour Admin, Chefs de département et Chefs de projet -->
             <c:if test="${sessionScope.currentUser.role == 'ADMINISTRATEUR' || sessionScope.currentUser.role == 'CHEF_DEPARTEMENT' || sessionScope.currentUser.role == 'CHEF_PROJET'}">
                 <a href="${pageContext.request.contextPath}/projects" class="menu-card">
                     <div class="menu-icon">📊</div>
@@ -71,7 +68,6 @@
                 </a>
             </c:if>
 
-            <!-- Menu fiches de paie -->
             <a href="${pageContext.request.contextPath}/payslips" class="menu-card">
                 <div class="menu-icon">💰</div>
                 <div class="menu-title">Fiches de Paie</div>
@@ -87,7 +83,6 @@
                 </div>
             </a>
 
-            <!-- Menu uniquement pour Administrateur -->
             <c:if test="${sessionScope.currentUser.role == 'ADMINISTRATEUR'}">
                 <a href="${pageContext.request.contextPath}/reports" class="menu-card">
                     <div class="menu-icon">📈</div>

@@ -7,30 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Créer une Fiche de Paie</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
-    <style>
-        /* Styles spécifiques pour le calcul en temps réel */
-        .calculation-preview {
-            background: #f8f9fa;
-            padding: 20px;
-            border-radius: 5px;
-            margin: 20px 0;
-        }
-
-        .calculation-line {
-            display: flex;
-            justify-content: space-between;
-            padding: 8px 0;
-            border-bottom: 1px solid #dee2e6;
-        }
-
-        .calculation-line:last-child {
-            border-bottom: none;
-            font-weight: bold;
-            font-size: 18px;
-            color: #28a745;
-            padding-top: 15px;
-        }
-    </style>
     <script>
         function calculateNet() {
             const salary = parseFloat(document.getElementById('salary').value) || 0;

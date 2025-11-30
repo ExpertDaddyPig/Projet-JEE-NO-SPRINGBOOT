@@ -8,66 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${project.project_name} - Détails</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
-    <style>
-        /* Styles spécifiques pour la vue détaillée des projets */
-        body {
-            background-color: #f5f5f5;
-            padding: 20px;
-        }
-
-        .project-header {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            margin-bottom: 25px;
-        }
-
-        .project-header h1 {
-            color: #333;
-            font-size: 32px;
-            margin-bottom: 15px;
-        }
-
-        .actions-grid {
-            display: flex;
-            flex-direction: row;
-            gap: 10px;
-            align-items: stretch;
-            justify-content: space-between;
-            width: 100%;
-        }
-
-        .actions-grid > a,
-        .actions-grid > form {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .btn {
-            width: 100%;
-            height: 100%;
-            padding: 12px 5px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            text-decoration: none;
-            font-weight: 500;
-            font-size: 13px;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            white-space: normal;
-            line-height: 1.2;
-            transition: opacity 0.2s, transform 0.1s;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
-    </style>
 </head>
 
 <body>

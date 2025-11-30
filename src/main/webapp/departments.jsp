@@ -2,7 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
-<!-- SÉCURITÉ -->
 <c:if test="${empty sessionScope.currentUser}">
     <c:redirect url="login.jsp" />
 </c:if>
@@ -62,16 +61,13 @@
                                     <tr>
                                         <td><strong>${dept.departement_name}</strong></td>
                                         <td>
-                                            <!-- Logique pour afficher les noms à partir des IDs stockés en String -->
                                             <c:if test="${not empty dept.employees}">
                                                 <c:set var="count" value="0" />
                                                 <c:set var="ids" value="${fn:split(dept.employees, ',')}" />
 
                                                 <div style="font-size: 13px; color: #555;">
                                                     <c:forEach var="id" items="${ids}" varStatus="status">
-                                                        <!-- On cherche l'employé correspondant dans la liste complète -->
                                                         <c:forEach var="emp" items="${allEmployees}">
-                                                            <!-- Attention : comparaison String vs Int ou String vs String -->
                                                             <c:if test="${String.valueOf(emp.id) == id}">
                                                                 ${emp.first_name} ${emp.last_name}
                                                                 <c:if test="${!status.last}">, </c:if>
@@ -101,7 +97,6 @@
         </div>
     </div>
 
-    <!-- MODAL ADD/EDIT -->
     <div id="deptModal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -134,7 +129,6 @@
         </div>
     </div>
 
-    <!-- MODAL DELETE -->
     <div id="deleteModal" class="modal-overlay">
         <div class="modal-content modal-small">
             <h3 style="margin-bottom: 15px;">Confirmer la suppression ?</h3>

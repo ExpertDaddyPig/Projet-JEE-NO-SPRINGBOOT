@@ -1,10 +1,6 @@
-# Projet JEE sans SPRINGBOOT
-Ici on n'utilise pas springboot oh nooooooooooooooooooon
+# Projet JEE sans SpringBoot
 
-(Pitié codez en anglais)
+Il vous faut au préalable Maven installé sur le pc.
 
-Pour communiquer entre nous. Cliquez.
-
-https://discord.gg/SvUnbvwD
-
-# IMPORTANT : UTILISEZ INTELLIJ, C'EST BIEN PLUS PRATIQUE QU'AVEC ECLIPSE (j'ai setup le projet sur IntelliJ)
+Pour lancer le projet, il suffit de :
+`mvn install` puis `mvn`.

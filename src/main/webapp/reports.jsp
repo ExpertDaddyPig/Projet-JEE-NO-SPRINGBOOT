@@ -11,6 +11,7 @@
                         <meta charset="UTF-8">
                         <meta name="viewport" content="width=device-width, initial-scale=1.0">
                         <title>Rapports et Statistiques</title>
+                        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
                     </head>
 
                     <body>
@@ -125,25 +126,6 @@
                                     <p>Aucune donnée d'employé disponible pour générer les rapports graphiques.</p>
                                 </div>
                             </c:if>
-
-                            <div class="reports-section">
-                                <h2>🔗 Rapports Détaillés</h2>
-                                <div class="quick-actions">
-                                    <a href="${pageContext.request.contextPath}/reports/departments"
-                                        class="action-card">
-                                        <h3>🏢 Rapport par Département</h3>
-                                        <p>Analyse détaillée de chaque département avec répartition des employés</p>
-                                    </a>
-                                    <a href="${pageContext.request.contextPath}/reports/projects" class="action-card">
-                                        <h3>📊 Rapport par Projet</h3>
-                                        <p>Statistiques complètes sur les projets et leurs équipes</p>
-                                    </a>
-                                    <a href="${pageContext.request.contextPath}/reports/employees" class="action-card">
-                                        <h3>👥 Rapport Employés</h3>
-                                        <p>Vue d'ensemble de tous les employés avec leurs grades</p>
-                                    </a>
-                                </div>
-                            </div>
                         </div>
                     </body>
 

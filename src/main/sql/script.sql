@@ -3,13 +3,9 @@ CREATE DATABASE IF NOT EXISTS rhdatabase;
 USE rhdatabase;
 
 -- DROP TABLE IF EXISTS Departements;
-
 -- DROP TABLE IF EXISTS Employees;
-
 -- DROP TABLE IF EXISTS Projects;
-
 -- DROP TABLE IF EXISTS Payslips;
-
 CREATE TABLE
     IF NOT EXISTS Departements (
         id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -33,8 +29,8 @@ CREATE TABLE
         email VARCHAR(100) NOT NULL UNIQUE,
         username VARCHAR(50) NOT NULL UNIQUE,
         password_hash VARCHAR(255) NOT NULL,
-        createdAt DATE,
-        lastLogin DATE,
+        createdAt DATETIME,
+        lastLogin DATETIME,
         isActive BOOLEAN,
         CONSTRAINT fk_departement_id FOREIGN KEY (departement_id) REFERENCES Departements (id),
         CONSTRAINT check_rank CHECK (employe_rank IN (1, 2, 3, 4))
@@ -84,7 +80,7 @@ VALUES
         'admin@admin.com',
         'sys_admin',
         '$2a$12$b7Acw.axAnGB4Vhng1yPUOLtvC1GKx0nuz/IBALwrThaS6DH6YpaS', -- 12345678
-        CURRENT_TIMESTAMP(),
-        CURRENT_TIMESTAMP(),
+        CURDATE(),
+        CURDATE(),
         TRUE
     );

@@ -62,5 +62,3 @@ INSERT INTO
     Departements (departement_name, employees)
 VALUES
     ("Administration", "0");
-
-INSERT INTO Employees VALUES (NULL, 1, 'System', 'Admin', 'Other', 'A1000', 'All Projects', 'Administrator', 4, 40, 'admin@admin.com', 'sys_admin', '$2a$12$b7Acw.axAnGB4Vhng1yPUOLtvC1GKx0nuz/IBALwrThaS6DH6YpaS', CURDATE(), CURDATE(), TRUE);

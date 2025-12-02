@@ -1,6 +1,6 @@
 package com.main.model;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 
 import jakarta.persistence.*;
@@ -54,17 +54,17 @@ public class Employe {
     private boolean isActive;
 
     @Column(name = "createdAt")
-    private LocalDate createdAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "lastLogin")
-    private LocalDate lastLogin;
+    private LocalDateTime lastLogin;
 
     @Transient
     private Role role;
 
     public Employe() {
         this.isActive = true;
-        this.createdAt = LocalDate.now();
+        this.createdAt = LocalDateTime.now();
     }
 
     public Employe(String first_name, String last_name, String email, String gender, int employe_rank, int age) {
@@ -236,19 +236,19 @@ public class Employe {
         this.isActive = active;
     }
 
-    public LocalDate getCreatedAt() {
+    public LocalDateTime getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(LocalDate createdAt) {
+    public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
 
-    public LocalDate getLastLogin() {
+    public LocalDateTime getLastLogin() {
         return lastLogin;
     }
 
-    public void setLastLogin(LocalDate lastLogin) {
+    public void setLastLogin(LocalDateTime lastLogin) {
         this.lastLogin = lastLogin;
     }
 

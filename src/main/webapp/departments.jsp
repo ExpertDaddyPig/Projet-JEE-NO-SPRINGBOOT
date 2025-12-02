@@ -21,8 +21,6 @@
         <div class="navbar-brand">Gestion RH - Départements</div>
         <div class="navbar-links">
             <a href="${pageContext.request.contextPath}/dashboard">Tableau de bord</a>
-            <a href="${pageContext.request.contextPath}/users">Employés</a>
-            <a href="${pageContext.request.contextPath}/payslips">Fiches de Paie</a>
             <div class="user-info">
                 <span class="user-name">${sessionScope.currentUser.username}</span>
                 <span class="user-role">${sessionScope.currentUser.role.displayName}</span>

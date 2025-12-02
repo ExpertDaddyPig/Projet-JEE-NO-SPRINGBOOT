@@ -81,7 +81,7 @@ public class DiagnosticServlet extends HttpServlet {
         out.println("<tr><th>JSP</th><th>Emplacement</th><th>URL</th></tr>");
 
         String[][] jsps = {
-                {"pay.jsp", "webapp/", "/pay.jsp"},
+                {"pay.jsp", "webapp/", "/payslips.jsp"},
                 {"projects.jsp", "webapp/", "/projects.jsp"},
                 {"dashboard.jsp", "webapp/", "/dashboard.jsp"},
                 {"login.jsp", "webapp/", "/login.jsp"}

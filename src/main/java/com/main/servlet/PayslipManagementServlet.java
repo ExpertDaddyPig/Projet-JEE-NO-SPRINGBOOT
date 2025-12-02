@@ -93,7 +93,7 @@ public class PayslipManagementServlet extends HttpServlet {
         }
 
         request.setAttribute("payslips", payslips);
-        request.getRequestDispatcher("/pay.jsp").forward(request, response);
+        request.getRequestDispatcher("/payslips.jsp").forward(request, response);
     }
 
     /**
@@ -256,7 +256,7 @@ public class PayslipManagementServlet extends HttpServlet {
         request.setAttribute("payslips", payslips);
         request.setAttribute("searchEmployeId", employeIdStr);
         request.setAttribute("searchMonth", monthStr);
-        request.getRequestDispatcher("/pay.jsp").forward(request, response);
+        request.getRequestDispatcher("/payslips.jsp").forward(request, response);
     }
 
     /**

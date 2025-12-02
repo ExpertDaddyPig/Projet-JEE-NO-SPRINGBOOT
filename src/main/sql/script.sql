@@ -2,10 +2,10 @@ CREATE DATABASE IF NOT EXISTS rhdatabase;
 
 USE rhdatabase;
 
--- DROP TABLE IF EXISTS Departements;
--- DROP TABLE IF EXISTS Employees;
--- DROP TABLE IF EXISTS Projects;
--- DROP TABLE IF EXISTS Payslips;
+ DROP TABLE IF EXISTS Departements;
+ DROP TABLE IF EXISTS Employees;
+ DROP TABLE IF EXISTS Projects;
+ DROP TABLE IF EXISTS Payslips;
 CREATE TABLE
     IF NOT EXISTS Departements (
         id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -63,24 +63,4 @@ INSERT INTO
 VALUES
     ("Administration", "0");
 
-INSERT INTO
-    Employees
-VALUES
-    (
-        NULL,
-        1,
-        'System',
-        'Admin',
-        'Other',
-        'A1000',
-        'All Projects',
-        'Administrator',
-        4,
-        40,
-        'admin@admin.com',
-        'sys_admin',
-        '$2a$12$b7Acw.axAnGB4Vhng1yPUOLtvC1GKx0nuz/IBALwrThaS6DH6YpaS', -- 12345678
-        CURDATE(),
-        CURDATE(),
-        TRUE
-    );
+INSERT INTO Employees VALUES (NULL, 1, 'System', 'Admin', 'Other', 'A1000', 'All Projects', 'Administrator', 4, 40, 'admin@admin.com', 'sys_admin', '$2a$12$b7Acw.axAnGB4Vhng1yPUOLtvC1GKx0nuz/IBALwrThaS6DH6YpaS', CURDATE(), CURDATE(), TRUE);

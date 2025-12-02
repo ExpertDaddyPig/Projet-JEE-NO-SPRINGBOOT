@@ -115,7 +115,7 @@
 
                 <configuration>
                     <properties>
-                        <cargo.servlet.port>8080</cargo.servlet.port>
+                        <cargo.servlet.port>6969</cargo.servlet.port>
                     </properties>
                 </configuration>
 

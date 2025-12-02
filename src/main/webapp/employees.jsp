@@ -8,52 +8,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestion des Employés</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/styles.css">
-    <style>
-        /* Styles spécifiques à cette page uniquement */
-        .search-form {
-            display: flex;
-            align-items: center;
-            background: white;
-            padding: 5px;
-            border-radius: 5px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-            border: 1px solid #eee;
-        }
-
-        .search-input {
-            border: none;
-            padding: 8px 12px;
-            font-size: 14px;
-            outline: none;
-            width: 300px;
-            color: #555;
-        }
-
-        .search-btn {
-            background-color: #6c757d;
-            color: white;
-            border: none;
-            padding: 8px 12px;
-            border-radius: 4px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .search-btn:hover {
-            background-color: #5a6268;
-        }
-
-        .reset-link {
-            color: #dc3545;
-            text-decoration: none;
-            margin-left: 10px;
-            margin-right: 5px;
-            font-weight: bold;
-            font-size: 18px;
-            display: flex;
-            align-items: center;
-        }
-    </style>
 </head>
 
         <body>
@@ -62,8 +16,6 @@
                 <div class="navbar-brand">Gestion RH - Employés</div>
                 <div class="navbar-links">
                     <a href="${pageContext.request.contextPath}/dashboard">Tableau de bord</a>
-                    <a href="${pageContext.request.contextPath}/projects">Projets</a>
-                    <a href="${pageContext.request.contextPath}/payslips">Fiches de Paie</a>
                     <div class="user-info">
                         <span class="user-name">${sessionScope.currentUser.username}</span>
                         <span class="user-role">${sessionScope.currentUser.role.displayName}</span>

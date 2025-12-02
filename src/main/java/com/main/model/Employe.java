@@ -59,6 +59,7 @@ public class Employe {
     @Column(name = "lastLogin")
     private LocalDate lastLogin;
 
+    @Transient
     private Role role;
 
     public Employe() {

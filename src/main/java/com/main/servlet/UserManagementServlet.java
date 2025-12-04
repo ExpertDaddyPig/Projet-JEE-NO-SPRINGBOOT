@@ -80,7 +80,8 @@ public class UserManagementServlet extends HttpServlet {
         List<Employe> users;
 
         if (search != null && !search.trim().isEmpty()) {
-            int deptId = rhdao.getDepartement("departement_name = " + search).getId();
+            Departement dept = rhdao.getDepartement("departement_name LIKE '%" + search + "%'");
+            Integer deptId = dept != null ? dept.getId() : -1;
             String clause = "last_name LIKE '%" + search + "%' OR " +
                     "first_name LIKE '%" + search + "%' OR " +
                     "registration_number LIKE '%" + search + "%' OR " +
